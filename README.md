@@ -64,4 +64,4 @@ In this experiment, I use three types of network. They are very simple.
 | Source Encoder + Source Classifier |   99.140000%   |  83.978495%   |
 | Target Encoder + Source Classifier |                |  97.634409%   |
 
-Domain Adaptation does work (97% vs 83%).
+Domain Adaptation does work (97% vs 83%)."# Eos" 
