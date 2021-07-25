@@ -15,10 +15,11 @@ def get_mnist(train):
                                           mean=params.dataset_mean,
                                           std=params.dataset_std)])
 
+    transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize([0.5], [0.5])])
     # dataset and data loader
     mnist_dataset = datasets.MNIST(root=params.data_root,
                                    train=train,
-                                   transform=pre_process,
+                                   transform=transform,
                                    download=True)
 
     mnist_data_loader = torch.utils.data.DataLoader(
