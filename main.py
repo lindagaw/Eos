@@ -56,7 +56,7 @@ if __name__ == '__main__':
 
     if not (tgt_encoder.restored and critic.restored and
             params.tgt_model_trained):
-        tgt_encoder = train_tgt(src_encoder, src_encoder, critic,
+        tgt_encoder = train_tgt(src_encoder, tgt_encoder, critic,
                                 src_data_loader, tgt_data_loader)
 
     # eval target encoder on test set of target dataset
