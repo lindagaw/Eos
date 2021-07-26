@@ -177,14 +177,5 @@ def train_tgt_classifier(encoder, classifier, data_loader):
                               len(data_loader),
                               loss.data))
 
-        # save model parameters
-        if ((epoch + 1) % params.save_step_pre == 0):
-            save_model(encoder, "ADDA-target-encoder-{}.pt".format(epoch + 1))
-            save_model(
-                classifier, "ADDA-target-classifier-{}.pt".format(epoch + 1))
-
-    # # save final model
-    save_model(encoder, "ADDA-target-encoder-final.pt")
-    save_model(classifier, "ADDA-target-classifier-final.pt")
 
     return encoder, classifier
