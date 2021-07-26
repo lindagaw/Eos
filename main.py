@@ -1,7 +1,7 @@
 """Main script for ADDA."""
 
 import params
-from core import eval_src, eval_tgt, train_src, train_tgt
+from core import eval_src, eval_tgt, train_src, train_tgt, train_tgt_classifier
 from models import Discriminator, LeNetClassifier, LeNetEncoder
 from utils import get_data_loader, init_model, init_random_seed
 
@@ -20,6 +20,8 @@ if __name__ == '__main__':
                              restore=params.src_encoder_restore)
     src_classifier = init_model(net=LeNetClassifier(),
                                 restore=params.src_classifier_restore)
+    tgt_classifier = init_model(net=LeNetClassifier(),
+                                restore='')
     tgt_encoder = init_model(net=LeNetEncoder(),
                              restore=params.tgt_encoder_restore)
     critic = init_model(Discriminator(input_dims=params.d_input_dims,
@@ -59,9 +61,13 @@ if __name__ == '__main__':
         tgt_encoder = train_tgt(src_encoder, tgt_encoder, critic,
                                 src_data_loader, tgt_data_loader)
 
+    tgt_encoder, tgt_classifier = train_tgt_classifier(
+        tgt_encoder, tgt_classifier, tgt_data_loader)
+
+
     # eval target encoder on test set of target dataset
     print("=== Evaluating classifier for encoded target domain ===")
     print(">>> source only <<<")
     eval_tgt(src_encoder, src_classifier, tgt_data_loader_eval)
     print(">>> domain adaption <<<")
-    eval_tgt(tgt_encoder, src_classifier, tgt_data_loader_eval)
+    eval_tgt(tgt_encoder, tgt_classifier, tgt_data_loader_eval)
