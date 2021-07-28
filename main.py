@@ -20,7 +20,7 @@ if __name__ == '__main__':
 
     # train the original source classifier, the Progenitor
     print(">>> the original source classifier, the Progenitor <<<")
-    progenitor = init_model(net=Successor(),
+    progenitor = init_model(net=Progenitor(),
                              restore=params.progenitor_restore)
     print(progenitor)
     progenitor = train_progenitor(progenitor, src_data_loader)
