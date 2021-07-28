@@ -88,7 +88,7 @@ def init_model(net, restore):
 def load_chopped_state_dict(net, state_dict):
 
     own_state = net.state_dict()
-    for name, param in state_dict.items():
+    for name, param in torch.load(state_dict).items():
         if name not in own_state:
              continue
         if isinstance(param, Parameter):
@@ -100,7 +100,7 @@ def load_chopped_state_dict(net, state_dict):
     if torch.cuda.is_available():
         cudnn.benchmark = True
         net.cuda()
-        
+
     return net
 
 def save_model(net, filename):
