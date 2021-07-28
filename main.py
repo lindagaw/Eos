@@ -28,13 +28,13 @@ if __name__ == '__main__':
 
     print(">>> load the chopped model with 1 conv, the Descendant <<<")
     descendant = init_model(net=Descendant(),
-                             restore='')
+                             restore=None)
     descendant = load_chopped_state_dict(model=Descendant(), pretrained_dict=params.progenitor_restore)
     print(descendant)
 
     print(">>> load the chopped model with 2 convs, the Successor <<<")
     successor = init_model(net=Successor(),
-                             restore='')
+                             restore=None)
     successor = load_chopped_state_dict(model=Successor(), pretrained_dict=params.progenitor_restore)
     print(successor)
 

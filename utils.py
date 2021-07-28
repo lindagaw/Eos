@@ -97,6 +97,8 @@ def load_chopped_state_dict(model, pretrained_dict):
     # 3. load the new state dict
     model.load_state_dict(pretrained_dict)
 
+    return model
+
 def save_model(net, filename):
     """Save trained model."""
     if not os.path.exists(params.model_root):
