@@ -2,7 +2,10 @@
 
 import params
 from core import eval_src, eval_tgt, train_src, train_tgt, train_tgt_classifier
+from core import train_progenitor, eval_progenitor
+
 from models import Discriminator, LeNetClassifier, LeNetEncoder
+from models import Progenitor, Descendant, Successor
 from utils import get_data_loader, init_model, init_random_seed
 
 if __name__ == '__main__':
@@ -15,6 +18,15 @@ if __name__ == '__main__':
     tgt_data_loader = get_data_loader(params.tgt_dataset)
     tgt_data_loader_eval = get_data_loader(params.tgt_dataset, train=False)
 
+    # train the original source classifier, the Progenitor
+    progenitor = init_model(net=LeNetEncoder(),
+                             restore=params.progenitor_restore)
+    print(">>> the original source classifier, the Progenitor <<<")
+    print(progenitor)
+    progenitor = train_progenitor(progenitor, src_data_loader)
+    eval_progenitor(progenitor, src_data_loader_eval)
+
+'''
     # load models
     src_encoder = init_model(net=LeNetEncoder(),
                              restore=params.src_encoder_restore)
@@ -71,3 +83,4 @@ if __name__ == '__main__':
     eval_tgt(src_encoder, src_classifier, tgt_data_loader_eval)
     print(">>> domain adaption <<<")
     eval_tgt(tgt_encoder, tgt_classifier, tgt_data_loader_eval)
+'''

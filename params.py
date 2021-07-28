@@ -10,7 +10,7 @@ batch_size = 50
 image_size = 64
 
 # params for source dataset
-src_dataset = "KMNIST"
+src_dataset = "MNIST"
 src_encoder_restore = "snapshots/ADDA-source-encoder-final.pt"
 src_classifier_restore = "snapshots/ADDA-source-classifier-final.pt"
 src_model_trained = True
@@ -43,3 +43,5 @@ d_learning_rate = 1e-4
 c_learning_rate = 1e-4
 beta1 = 0.5
 beta2 = 0.9
+
+progenitor_restore = "snapshots/progenitor-final.pt"
