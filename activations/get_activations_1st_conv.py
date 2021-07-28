@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.optim as optim
 
 import params
-from utils import make_variable, save_descendant
+from utils import make_variable, save_model
 
 import os
 import numpy as np
