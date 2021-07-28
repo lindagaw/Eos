@@ -85,6 +85,23 @@ def init_model(net, restore):
 
     return net
 
+def load_chopped_state_dict(net, state_dict):
+
+    own_state = net.state_dict()
+    for name, param in state_dict.items():
+        if name not in own_state:
+             continue
+        if isinstance(param, Parameter):
+            # backwards compatibility for serialized parameters
+            param = param.data
+        own_state[name].copy_(param)
+
+    # check if cuda is available
+    if torch.cuda.is_available():
+        cudnn.benchmark = True
+        net.cuda()
+        
+    return net
 
 def save_model(net, filename):
     """Save trained model."""

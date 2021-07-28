@@ -19,12 +19,24 @@ if __name__ == '__main__':
     tgt_data_loader_eval = get_data_loader(params.tgt_dataset, train=False)
 
     # train the original source classifier, the Progenitor
-    progenitor = init_model(net=LeNetEncoder(),
-                             restore=params.progenitor_restore)
     print(">>> the original source classifier, the Progenitor <<<")
+    progenitor = init_model(net=Successor(),
+                             restore=params.progenitor_restore)
     print(progenitor)
     progenitor = train_progenitor(progenitor, src_data_loader)
     eval_progenitor(progenitor, src_data_loader_eval)
+
+    print(">>> load the chopped model with 1 conv, the Descendant <<<")
+    descendant = init_model(net=Descendant(),
+                             restore='')
+    descendant = load_chopped_state_dict(net=Descendant(), state_dict=params.progenitor_restore)
+    print(descendant)
+
+    print(">>> load the chopped model with 2 convs, the Successor <<<")
+    successor = init_model(net=Successor(),
+                             restore='')
+    successor = load_chopped_state_dict(net=Successor(), state_dict=params.progenitor_restore)
+    print(successor)
 
 '''
     # load models
