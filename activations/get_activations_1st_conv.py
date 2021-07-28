@@ -13,6 +13,7 @@ def apply_descendant(descendant, data_loader):
     """Evaluate descendant for source domain."""
     # set eval state for Dropout and BN layers
     descendant.eval()
+    descendant.cuda()
 
     # init loss and accuracy
     loss = 0.0
