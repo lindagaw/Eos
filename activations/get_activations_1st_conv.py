@@ -9,7 +9,7 @@ import os
 import numpy as np
 from sklearn.metrics import accuracy_score
 
-def descendant(descendant, data_loader):
+def apply_descendant(descendant, data_loader):
     """Evaluate descendant for source domain."""
     # set eval state for Dropout and BN layers
     descendant.eval()
@@ -27,3 +27,6 @@ def descendant(descendant, data_loader):
         labels = make_variable(labels).squeeze_()
 
         preds = descendant(images)
+
+        for pred in preds:
+            print(pred)

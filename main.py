@@ -4,6 +4,8 @@ import params
 from core import eval_src, eval_tgt, train_src, train_tgt, train_tgt_classifier
 from core import train_progenitor, eval_progenitor
 
+from activations import apply_descendant
+
 from models import Discriminator, LeNetClassifier, LeNetEncoder
 from models import Progenitor, Descendant, Successor
 from utils import get_data_loader, init_model, init_random_seed, load_chopped_state_dict
@@ -38,6 +40,9 @@ if __name__ == '__main__':
     successor = load_chopped_state_dict(model=Successor(), pretrained_dict=params.progenitor_restore)
     print(successor)
 
+
+    print(">>> get the activations after the 1st conv, using Descendant <<<")
+    apply_descendant(descendant, src_data_loader)
 '''
     # load models
     src_encoder = init_model(net=LeNetEncoder(),
