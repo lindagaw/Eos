@@ -87,6 +87,8 @@ def init_model(net, restore):
 
 def load_chopped_state_dict(model, pretrained_dict):
 
+    pretrained_dict = torch.load(pretrained_dict)
+
     model_dict = model.state_dict()
     # 1. filter out unnecessary keys
     pretrained_dict = {k: v for k, v in pretrained_dict.items() if k in model_dict}
