@@ -6,7 +6,7 @@ from core import train_progenitor, eval_progenitor
 
 from models import Discriminator, LeNetClassifier, LeNetEncoder
 from models import Progenitor, Descendant, Successor
-from utils import get_data_loader, init_model, init_random_seed
+from utils import get_data_loader, init_model, init_random_seed, load_chopped_state_dict
 
 if __name__ == '__main__':
     # init random seed
