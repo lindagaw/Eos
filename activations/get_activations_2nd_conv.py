@@ -9,7 +9,7 @@ import os
 import numpy as np
 from sklearn.metrics import accuracy_score
 
-def apply_successor(successor, data_loader):
+def apply_successor(successor, data_loader, src_or_tgt, dev_or_eval):
     """Evaluate successor for source domain."""
     # set eval state for Dropout and BN layers
     successor.eval()
@@ -37,12 +37,12 @@ def apply_successor(successor, data_loader):
             ys.append(label.detach().cpu().numpy())
 
     activations = np.asarray(activations)
-    ys = ys.asarray(activations)
+    ys = np.asarray(activations)
 
     print('the activations after the 1st conv have shape {}'.format(activations.shape))
-    np.save('snapshots//1st_conv_activations.npy', activations)
+    np.save('snapshots//' + src_or_tgt + '_' + dev_or_eval + '_1st_conv_activations.npy', activations)
 
     print('the activations after the 1st conv have labels with shape {}'.format(ys.shape))
-    np.save('snapshots//1st_conv_activations_labels.npy', activations)
+    np.save('snapshots//' + src_or_tgt + '_' + dev_or_eval + '_1st_conv_activations_labels.npy', activations)
 
     return activations, ys

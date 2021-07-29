@@ -37,12 +37,24 @@ if __name__ == '__main__':
     print(successor)
 
     print(">>> get the activations after the 1st conv, using Descendant <<<")
-    descendant_activations, descendant_activations_labels = apply_descendant(descendant, src_data_loader)
-    descendant_activations_eval, descendant_activations_labels_eval = apply_descendant(descendant, src_data_loader_eval)
+    src_descendant_activations, src_descendant_activations_labels \
+                        = apply_descendant(descendant, src_data_loader, 'src', 'dev')
+    src_descendant_activations_eval, src_descendant_activations_labels_eval \
+                        = apply_descendant(descendant, src_data_loader_eval, 'src', 'eval')
+    tgt_descendant_activations, tgt_descendant_activations_labels \
+                        = apply_descendant(descendant, tgt_data_loader, 'tgt', 'dev')
+    tgt_descendant_activations_eval, tgt_descendant_activations_labels_eval \
+                        = apply_descendant(descendant, tgt_data_loader_eval, 'tgt', 'eval')
 
     print(">>> get the activations after the 2nd conv, using Successor <<<")
-    successor_activations, successor_activations_labels = apply_successor(successor, src_data_loader)
-    successor_activations_eval, successor_activations_labels_eval = apply_successor(successor, src_data_loader_eval)
+    src_successor_activations, src_successor_activations_labels \
+                        = apply_successor(successor, src_data_loader, 'src', 'dev')
+    src_successor_activations_eval, src_successor_activations_labels_eval \
+                        = apply_successor(successor, src_data_loader_eval, 'src', 'eval')
+    tgt_successor_activations, tgt_successor_activations_labels \
+                        = apply_successor(successor, tgt_data_loader, 'tgt', 'dev')
+    tgt_successor_activations_eval, tgt_successor_actisuccessorvations_labels_eval \
+                        = apply_successor(successor, tgt_data_loader_eval, 'tgt', 'eval')
 
 '''
     # load models
