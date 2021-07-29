@@ -10,7 +10,7 @@ from models import Discriminator, LeNetClassifier, LeNetEncoder
 from models import Progenitor, Descendant, Successor
 from utils import get_data_loader, init_model, init_random_seed, load_chopped_state_dict
 
-from dataset import get_conv_1_activations
+from datasets import get_conv_1_activations
 
 if __name__ == '__main__':
     # init random seed
