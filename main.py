@@ -107,7 +107,7 @@ if __name__ == '__main__':
     print(">>> Critic <<<")
     print(critic)
 
-'''
+
     # init weights of target encoder with those of source encoder
     if not tgt_encoder.restored:
         tgt_encoder.load_state_dict(src_encoder.state_dict())
@@ -115,16 +115,15 @@ if __name__ == '__main__':
     if not (tgt_encoder.restored and critic.restored and
             params.tgt_model_trained):
         tgt_encoder = train_tgt(src_encoder, tgt_encoder, critic,
-                                src_data_loader, tgt_data_loader)
+                                src_conv_1_activations_data_loader, tgt_conv_1_activations_data_loader)
 
     tgt_encoder, tgt_classifier = train_tgt_classifier(
-        tgt_encoder, tgt_classifier, tgt_data_loader)
+        tgt_encoder, tgt_classifier, tgt_conv_1_activations_data_loader)
 
 
     # eval target encoder on test set of target dataset
     print("=== Evaluating classifier for encoded target domain ===")
     print(">>> source only <<<")
-    eval_tgt(src_encoder, src_classifier, tgt_data_loader_eval)
+    eval_tgt(src_encoder, src_classifier, tgt_conv_1_activations_data_loader_eval)
     print(">>> domain adaption <<<")
-    eval_tgt(tgt_encoder, tgt_classifier, tgt_data_loader_eval)
-'''
+    eval_tgt(tgt_encoder, tgt_classifier, tgt_conv_1_activations_data_loader_eval)
