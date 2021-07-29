@@ -9,7 +9,7 @@ import os
 import gzip
 from torchvision import datasets, transforms
 
-class Descendant_Activations(data.Dataset):
+class Duccessor_Activations(data.Dataset):
 
     def __init__(self, root, train=True, transform=None, download=False, dataset='undefined'):
         """Init USPS dataset."""
@@ -18,8 +18,8 @@ class Descendant_Activations(data.Dataset):
             raise Exception("Parameter dataset's value must be 'src' or 'tgt', case sensitive.")
 
         self.root = 'data//'
-        self.training = dataset + "_conv_1_activations.pkl"
-        self.testing = dataset + "_conv_1_activations_eval.pkl"
+        self.training = dataset + "_conv_2_activations.pkl"
+        self.testing = dataset + "_conv_2_activations_eval.pkl"
         self.train = train
 
         self.transform = transform
@@ -38,10 +38,10 @@ class Descendant_Activations(data.Dataset):
             pre_process =  transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.5,), (0.5,))])
 
 
-            xs_train = torch.Tensor(np.load('snapshots//' + dataset + '_dev_1st_conv_activations.npy'))
-            xs_test = torch.Tensor(np.load('snapshots//' + dataset + '_dev_1st_conv_activations.npy'))
-            ys_train = torch.Tensor(np.load('snapshots//' + dataset + '_eval_1st_conv_activations_labels.npy'))
-            ys_test = torch.Tensor(np.load('snapshots//' + dataset + '_eval_1st_conv_activations_labels.npy'))
+            xs_train = torch.Tensor(np.load('snapshots//' + dataset + '_dev_2nd_conv_activations.npy'))
+            xs_test = torch.Tensor(np.load('snapshots//' + dataset + '_dev_2nd_conv_activations.npy'))
+            ys_train = torch.Tensor(np.load('snapshots//' + dataset + '_eval_2nd_conv_activations_labels.npy'))
+            ys_test = torch.Tensor(np.load('snapshots//' + dataset + '_eval_2nd_conv_activations_labels.npy'))
 
 
             torch.save(TensorDataset(xs_train, ys_train), self.root + self.training)
@@ -108,7 +108,7 @@ class Descendant_Activations(data.Dataset):
 
         return audios, labels
 
-def get_conv_1_activations(train, dataset):
+def get_conv_2_activations(train, dataset):
 
     pre_process = transforms.Compose([transforms.ToTensor(),
                                       transforms.Normalize(
@@ -116,15 +116,15 @@ def get_conv_1_activations(train, dataset):
                                           std=params.dataset_std)])
     pre_process =  transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.5,), (0.5,))])
 
-    conv_1_activations_dataset = Descendant_Activations(root=params.data_root,
+    conv_2_activations_dataset = Duccessor_Activations(root=params.data_root,
                         train=train,
                         #transform=pre_process,
                         download=True,
                         dataset=dataset)
 
-    conv_1_activations_data_loader = torch.utils.data.DataLoader(
-        dataset=conv_1_activations_dataset,
+    conv_2_activations_data_loader = torch.utils.data.DataLoader(
+        dataset=conv_2_activations_dataset,
         batch_size=params.batch_size,
         shuffle=False)
 
-    return conv_1_activations_data_loader
+    return conv_2_activations_data_loader

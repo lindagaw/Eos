@@ -10,7 +10,7 @@ from models import Discriminator, LeNetClassifier, LeNetEncoder
 from models import Progenitor, Descendant, Successor
 from utils import get_data_loader, init_model, init_random_seed, load_chopped_state_dict
 
-from datasets import get_conv_1_activations
+from datasets import get_conv_1_activations, get_conv_2_activations
 
 if __name__ == '__main__':
     # init random seed
@@ -54,6 +54,10 @@ if __name__ == '__main__':
     print(">>> construct dataloader after activations from 1st conv <<<")
     conv_1_activations_data_loader = get_conv_1_activations(train=True, dataset='src')
     conv_1_activations_data_loader_eval = get_conv_1_activations(train=False, dataset='src')
+
+    print(">>> construct dataloader after activations from 2nd conv <<<")
+    conv_2_activations_data_loader = get_conv_2_activations(train=True, dataset='tgt')
+    conv_2_activations_data_loader_eval = get_conv_2_activations(train=False, dataset='tgt')
 '''
     # load models
     src_encoder = init_model(net=LeNetEncoder(),
