@@ -39,8 +39,8 @@ class Descendant_Activations(data.Dataset):
 
 
             xs_train = torch.from_numpy(np.load('snapshots//' + dataset + '_dev_1st_conv_activations.npy'))
-            xs_test = torch.from_numpy(np.load('snapshots//' + dataset + '_dev_1st_conv_activations.npy'))
-            ys_train = torch.from_numpy(np.load('snapshots//' + dataset + '_eval_1st_conv_activations_labels.npy'))
+            xs_test = torch.from_numpy(np.load('snapshots//' + dataset + '_eval_1st_conv_activations.npy'))
+            ys_train = torch.from_numpy(np.load('snapshots//' + dataset + '_dev_1st_conv_activations_labels.npy'))
             ys_test = torch.from_numpy(np.load('snapshots//' + dataset + '_eval_1st_conv_activations_labels.npy'))
 
             print(xs_train.shape)
