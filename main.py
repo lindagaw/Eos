@@ -36,9 +36,12 @@ if __name__ == '__main__':
     successor = load_chopped_state_dict(model=Successor(), pretrained_dict=params.progenitor_restore)
     print(successor)
 
-
     print(">>> get the activations after the 1st conv, using Descendant <<<")
-    apply_descendant(descendant, src_data_loader)
+    descendant_activations = apply_descendant(descendant, src_data_loader)
+
+    print(">>> get the activations after the 2nd conv, using Successor <<<")
+    successor_activations = apply_successor(successor, src_data_loader)
+
 '''
     # load models
     src_encoder = init_model(net=LeNetEncoder(),
