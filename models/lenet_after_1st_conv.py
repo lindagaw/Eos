@@ -1,15 +1,15 @@
-"""LeNet model for ADDA."""
+"""LeNet_Conv_1_ model for ADDA."""
 
 import torch.nn.functional as F
 from torch import nn
 
 
-class LeNetEncoder(nn.Module):
-    """LeNet encoder model for ADDA."""
+class LeNet_Conv_1_Encoder(nn.Module):
+    """LeNet_Conv_1_ encoder model for ADDA."""
 
     def __init__(self):
-        """Init LeNet encoder."""
-        super(LeNetEncoder, self).__init__()
+        """Init LeNet_Conv_1_ encoder."""
+        super(LeNet_Conv_1_Encoder, self).__init__()
 
         self.restored = False
 
@@ -31,22 +31,22 @@ class LeNetEncoder(nn.Module):
         self.fc1 = nn.Linear(50 * 4 * 4, 500)
 
     def forward(self, input):
-        """Forward the LeNet."""
+        """Forward the LeNet_Conv_1_."""
         conv_out = self.encoder(input)
         feat = self.fc1(conv_out.view(-1, 50 * 4 * 4))
         return feat
 
 
-class LeNetClassifier(nn.Module):
-    """LeNet classifier model for ADDA."""
+class LeNet_Conv_1_Classifier(nn.Module):
+    """LeNet_Conv_1_ classifier model for ADDA."""
 
     def __init__(self):
-        """Init LeNet encoder."""
-        super(LeNetClassifier, self).__init__()
+        """Init LeNet_Conv_1_ encoder."""
+        super(LeNet_Conv_1_Classifier, self).__init__()
         self.fc2 = nn.Linear(500, 10)
 
     def forward(self, feat):
-        """Forward the LeNet classifier."""
+        """Forward the LeNet_Conv_1_ classifier."""
         out = F.dropout(F.relu(feat), training=self.training)
         out = self.fc2(out)
         return out
