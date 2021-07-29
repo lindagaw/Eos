@@ -70,8 +70,10 @@ def get_data_loader(name, train=True):
 def init_model(net, restore):
     """Init models with cuda and weights."""
     # init weights of model
-    net.apply(init_weights)
-
+    try:
+        net.apply(init_weights)
+    except:
+        pass
     # restore model weights
     if restore is not None and os.path.exists(restore):
         net.load_state_dict(torch.load(restore))
