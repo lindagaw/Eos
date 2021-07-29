@@ -28,9 +28,9 @@ class LeNet_Conv_2_Encoder(nn.Module):
             # nn.MaxPool2d(kernel_size=2),
             # nn.ReLU()
 
-            nn.Conv2d(50, 50, kernel_size=5),
+            nn.Conv2d(50, 50, kernel_size=1),
             nn.Dropout2d(),
-            nn.MaxPool2d(kernel_size=2),
+            nn.MaxPool2d(kernel_size=1),
             nn.ReLU()
         )
         self.fc1 = nn.Linear(50 * 4 * 4, 500)
