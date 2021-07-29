@@ -43,6 +43,8 @@ class Descendant_Activations(data.Dataset):
             ys_train = torch.from_numpy(np.load('snapshots//' + dataset + '_eval_1st_conv_activations_labels.npy'))
             ys_test = torch.from_numpy(np.load('snapshots//' + dataset + '_eval_1st_conv_activations_labels.npy'))
 
+            print(xs_train.shape)
+            print(ys_train.shape)
 
             torch.save(TensorDataset(xs_train, ys_train), self.root + self.training)
             torch.save(TensorDataset(xs_test, ys_test), self.root + self.testing)

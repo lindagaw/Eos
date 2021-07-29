@@ -58,6 +58,12 @@ if __name__ == '__main__':
     print(">>> construct dataloader after activations from 2nd conv <<<")
     conv_2_activations_data_loader = get_conv_2_activations(train=True, dataset='tgt')
     conv_2_activations_data_loader_eval = get_conv_2_activations(train=False, dataset='tgt')
+
+
+
+
+
+
 '''
     # load models
     src_encoder = init_model(net=LeNetEncoder(),
