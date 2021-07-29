@@ -62,8 +62,8 @@ class Descendant_Activations(data.Dataset):
             self.train_data = self.train_data[indices[0:self.dataset_size], ::]
             self.train_labels = self.train_labels[indices[0:self.dataset_size]]
 
-        #self.train_data *= 255.0
-        self.train_data = self.train_data.transpose(2, 1)
+        self.train_data *= 255.0
+        #self.train_data = self.train_data.transpose(2, 1)
 
         print(self.train_data.shape)
 

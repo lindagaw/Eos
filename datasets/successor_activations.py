@@ -38,10 +38,10 @@ class Duccessor_Activations(data.Dataset):
             pre_process =  transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.5,), (0.5,))])
 
 
-            xs_train = torch.from_numpy(np.load('snapshots//' + dataset + '_dev_1st_conv_activations.npy'))
-            xs_test = torch.from_numpy(np.load('snapshots//' + dataset + '_eval_1st_conv_activations.npy'))
-            ys_train = torch.from_numpy(np.load('snapshots//' + dataset + '_dev_1st_conv_activations_labels.npy'))
-            ys_test = torch.from_numpy(np.load('snapshots//' + dataset + '_eval_1st_conv_activations_labels.npy'))
+            xs_train = torch.from_numpy(np.load('snapshots//' + dataset + '_dev_2nd_conv_activations.npy'))
+            xs_test = torch.from_numpy(np.load('snapshots//' + dataset + '_eval_2nd_conv_activations.npy'))
+            ys_train = torch.from_numpy(np.load('snapshots//' + dataset + '_dev_2nd_conv_activations_labels.npy'))
+            ys_test = torch.from_numpy(np.load('snapshots//' + dataset + '_eval_2nd_conv_activations_labels.npy'))
 
 
             torch.save(TensorDataset(xs_train, ys_train), self.root + self.training)
@@ -63,8 +63,8 @@ class Duccessor_Activations(data.Dataset):
             self.train_data = self.train_data[indices[0:self.dataset_size], ::]
             self.train_labels = self.train_labels[indices[0:self.dataset_size]]
 
-        #self.train_data *= 255.0
-        self.train_data = self.train_data.transpose(2, 1)
+        self.train_data *= 255.0
+        #self.train_data = self.train_data.transpose(2, 1)
 
         print(self.train_data.shape)
 
