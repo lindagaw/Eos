@@ -52,12 +52,12 @@ if __name__ == '__main__':
     apply_successor(successor, tgt_data_loader_eval, 'tgt', 'eval')
 
     print(">>> construct dataloader after activations from 1st conv <<<")
-    conv_1_activations_data_loader = get_conv_1_activations(train=True, dataset='src')
-    conv_1_activations_data_loader_eval = get_conv_1_activations(train=False, dataset='src')
+    conv_1_activations_data_loader = get_conv_1_activations(train=True, dataset='src', dev_or_eval='dev')
+    conv_1_activations_data_loader_eval = get_conv_1_activations(train=False, dataset='src', dev_or_eval='eval')
 
     print(">>> construct dataloader after activations from 2nd conv <<<")
-    conv_2_activations_data_loader = get_conv_2_activations(train=True, dataset='tgt')
-    conv_2_activations_data_loader_eval = get_conv_2_activations(train=False, dataset='tgt')
+    conv_2_activations_data_loader = get_conv_2_activations(train=True, dataset='tgt', dev_or_eval='dev')
+    conv_2_activations_data_loader_eval = get_conv_2_activations(train=False, dataset='tgt', dev_or_eval='eval')
 
 
 
