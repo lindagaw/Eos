@@ -16,6 +16,7 @@ def apply_successor(successor, data_loader):
     successor.cuda()
 
     activations = []
+    ys = []
 
     # init loss and accuracy
     loss = 0.0
@@ -31,11 +32,17 @@ def apply_successor(successor, data_loader):
 
         preds = successor(images)
 
-        for pred in preds:
+        for pred, label in zip(preds, labels):
             activations.append(pred.detach().cpu().numpy())
+            ys.append(label.detach().cpu().numpy())
 
     activations = np.asarray(activations)
-    print(activations.shape)
-    np.save('snapshots//2nd_conv_activations.npy', activations)
+    ys = ys.asarray(activations)
 
-    return activations
+    print('the activations after the 1st conv have shape {}'.format(activations.shape))
+    np.save('snapshots//1st_conv_activations.npy', activations)
+
+    print('the activations after the 1st conv have labels with shape {}'.format(ys.shape))
+    np.save('snapshots//1st_conv_activations_labels.npy', activations)
+
+    return activations, ys

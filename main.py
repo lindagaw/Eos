@@ -4,7 +4,7 @@ import params
 from core import eval_src, eval_tgt, train_src, train_tgt, train_tgt_classifier
 from core import train_progenitor, eval_progenitor
 
-from activations import apply_descendant
+from activations import apply_descendant, apply_successor
 
 from models import Discriminator, LeNetClassifier, LeNetEncoder
 from models import Progenitor, Descendant, Successor
@@ -37,10 +37,12 @@ if __name__ == '__main__':
     print(successor)
 
     print(">>> get the activations after the 1st conv, using Descendant <<<")
-    descendant_activations = apply_descendant(descendant, src_data_loader)
+    descendant_activations, descendant_activations_labels = apply_descendant(descendant, src_data_loader)
+    descendant_activations_eval, descendant_activations_labels_eval = apply_descendant(descendant, src_data_loader_eval)
 
     print(">>> get the activations after the 2nd conv, using Successor <<<")
-    successor_activations = apply_successor(successor, src_data_loader)
+    successor_activations, successor_activations_labels = apply_successor(successor, src_data_loader)
+    successor_activations_eval, successor_activations_labels_eval = apply_successor(successor, src_data_loader_eval)
 
 '''
     # load models
