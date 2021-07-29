@@ -3,7 +3,7 @@ import torch
 import numpy as np
 import torch.utils.data as data
 from torch.utils.data import TensorDataset, DataLoader
-import sound_params as params
+import params
 
 import os
 import gzip
