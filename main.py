@@ -10,6 +10,8 @@ from models import Discriminator, LeNetClassifier, LeNetEncoder
 from models import Progenitor, Descendant, Successor
 from utils import get_data_loader, init_model, init_random_seed, load_chopped_state_dict
 
+from dataset import get_conv_1_activations
+
 if __name__ == '__main__':
     # init random seed
     init_random_seed(params.manual_seed)
@@ -37,25 +39,21 @@ if __name__ == '__main__':
     print(successor)
 
     print(">>> get the activations after the 1st conv, using Descendant <<<")
-    src_descendant_activations, src_descendant_activations_labels \
-                        = apply_descendant(descendant, src_data_loader, 'src', 'dev')
-    src_descendant_activations_eval, src_descendant_activations_labels_eval \
-                        = apply_descendant(descendant, src_data_loader_eval, 'src', 'eval')
-    tgt_descendant_activations, tgt_descendant_activations_labels \
-                        = apply_descendant(descendant, tgt_data_loader, 'tgt', 'dev')
-    tgt_descendant_activations_eval, tgt_descendant_activations_labels_eval \
-                        = apply_descendant(descendant, tgt_data_loader_eval, 'tgt', 'eval')
+
+    apply_descendant(descendant, src_data_loader, 'src', 'dev')
+    apply_descendant(descendant, src_data_loader_eval, 'src', 'eval')
+    apply_descendant(descendant, tgt_data_loader, 'tgt', 'dev')
+    apply_descendant(descendant, tgt_data_loader_eval, 'tgt', 'eval')
 
     print(">>> get the activations after the 2nd conv, using Successor <<<")
-    src_successor_activations, src_successor_activations_labels \
-                        = apply_successor(successor, src_data_loader, 'src', 'dev')
-    src_successor_activations_eval, src_successor_activations_labels_eval \
-                        = apply_successor(successor, src_data_loader_eval, 'src', 'eval')
-    tgt_successor_activations, tgt_successor_activations_labels \
-                        = apply_successor(successor, tgt_data_loader, 'tgt', 'dev')
-    tgt_successor_activations_eval, tgt_successor_actisuccessorvations_labels_eval \
-                        = apply_successor(successor, tgt_data_loader_eval, 'tgt', 'eval')
+    apply_successor(successor, src_data_loader, 'src', 'dev')
+    apply_successor(successor, src_data_loader_eval, 'src', 'eval')
+    apply_successor(successor, tgt_data_loader, 'tgt', 'dev')
+    apply_successor(successor, tgt_data_loader_eval, 'tgt', 'eval')
 
+    print(">>> construct dataloader after activations from 1st conv <<<")
+    conv_1_activations_data_loader = get_conv_1_activations(train=True, dataset='src')
+    conv_1_activations_data_loader_eval = get_conv_1_activations(train=False, dataset='src')
 '''
     # load models
     src_encoder = init_model(net=LeNetEncoder(),

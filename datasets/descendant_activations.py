@@ -14,10 +14,10 @@ class Descendant_Activations(data.Dataset):
     def __init__(self, root, train=True, transform=None, download=False, dataset='undefined'):
         """Init USPS dataset."""
 
-        if not (dataset == 'emotion' or dataset == 'conflict'):
-            raise Exception("Parameter dataset's value must be 'emotion' or 'conflict', case sensitive.")
+        if not (dataset == 'src' or dataset == 'tgt'):
+            raise Exception("Parameter dataset's value must be 'src' or 'tgt', case sensitive.")
 
-        self.root = 'data//UTAH//conv_1_activations//'
+        self.root = 'data//'
         self.training = dataset + "_conv_1_activations.pkl"
         self.testing = dataset + "_conv_1_activations_eval.pkl"
         self.train = train
@@ -38,17 +38,11 @@ class Descendant_Activations(data.Dataset):
             pre_process =  transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.5,), (0.5,))])
 
 
-            xs_train = torch.Tensor(np.load(self.root + '1_conv_activations_' + \
-                                    dataset + '_train_x.npy'))
-            xs_test = torch.Tensor(np.load(self.root + '1_conv_activations_' + \
-                                    dataset + '_test_x.npy'))
+            xs_train = torch.Tensor(np.load('snapshots//' + dataset + '_dev_1st_conv_activations.npy'))
+            xs_test = torch.Tensor(np.load('snapshots//' + dataset + '_dev_1st_conv_activations.npy'))
+            ys_train = torch.Tensor(np.load('snapshots//' + dataset + '_eval_1st_conv_activations_labels.npy'))
+            ys_test = torch.Tensor(np.load('snapshots//' + dataset + '_eval_1st_conv_activations_labels.npy'))
 
-            if dataset == 'emotion':
-                ys_train = torch.Tensor(np.load('data//UTAH//binary_' + dataset + '_training_ys.npy'))
-                ys_test = torch.Tensor(np.load('data//UTAH//binary_' + dataset + '_testing_ys.npy'))
-            else:
-                ys_train = torch.Tensor(np.load('data//UTAH//' + dataset + '_training_ys.npy'))
-                ys_test = torch.Tensor(np.load('data//UTAH//' + dataset + '_testing_ys.npy'))
 
             torch.save(TensorDataset(xs_train, ys_train), self.root + self.training)
             torch.save(TensorDataset(xs_test, ys_test), self.root + self.testing)
