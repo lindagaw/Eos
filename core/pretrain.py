@@ -89,8 +89,13 @@ def eval_src(encoder, classifier, data_loader):
         images = make_variable(images, volatile=True)
         labels = make_variable(labels)
 
+        print('-------------------------')
+        print(preds)
+        print(labels)
+        print('-------------------------')
+
         preds = classifier(encoder(images))
-        #loss += criterion(preds, labels).data
+        loss += criterion(preds, labels).data
 
         pred_cls = preds.data.max(1)[1]
         acc += pred_cls.eq(labels.data).cpu().sum()
