@@ -35,7 +35,7 @@ def apply_descendant(descendant, data_loader, src_or_tgt, dev_or_eval):
 
         for pred, label in zip(preds, labels):
             activations.append(pred.detach().cpu().numpy())
-            ys.append(label.detach().cpu().numpy())
+            ys.append(np.expand_dims(label.detach().cpu().numpy(), axis=0))
 
     activations = np.asarray(activations)
     ys = np.asarray(ys)
