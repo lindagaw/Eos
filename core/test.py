@@ -37,9 +37,6 @@ def eval_tgt_with_probe(encoder, critic, src_classifier, tgt_classifier, data_lo
             else:
                 pred = torch.argmax(tgt_classifier(encoder(torch.unsqueeze(image, 0)))).detach().cpu().numpy()
 
-            print(label)
-            print(pred)
-
         ys_pred.append(np.squeeze(pred))
         ys_true.append(np.squeeze(label.detach().cpu().numpy()))
 

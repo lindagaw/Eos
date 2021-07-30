@@ -27,6 +27,8 @@ def apply_descendant(descendant, data_loader, src_or_tgt, dev_or_eval):
 
     # evaluate network
     for (images, labels) in data_loader:
+
+        print(labels)
         images = make_variable(images, volatile=True)
         labels = make_variable(labels).squeeze_()
 
