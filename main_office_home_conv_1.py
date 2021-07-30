@@ -15,7 +15,7 @@ from models import LeNet_Conv_1_Encoder, LeNet_Conv_1_Classifier, LeNet_Conv_2_E
 from utils import get_data_loader, init_model, init_random_seed, load_chopped_state_dict
 
 from datasets import get_conv_1_activations, get_conv_2_activations
-from dataset import get_office_home
+from datasets import get_office_home
 if __name__ == '__main__':
     # init random seed
     init_random_seed(params.manual_seed)
