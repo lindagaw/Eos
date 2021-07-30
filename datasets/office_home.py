@@ -46,8 +46,8 @@ class Office_Home(data.Dataset):
             torch.save(TensorDataset(xs_train, ys_train), self.root + self.training)
             torch.save(TensorDataset(xs_test, ys_test), self.root + self.testing)
 
-            data_set_train = torch.load(self.root + self.training)
-            data_set_test = torch.load(self.root + self.testing)
+            data_set_train = TensorDataset(xs_train, ys_train)
+            data_set_test = TensorDataset(xs_test, ys_test)
 
         if not self._check_exists():
             raise RuntimeError("Dataset not found." +
