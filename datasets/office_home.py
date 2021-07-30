@@ -17,7 +17,7 @@ class Office_Home(data.Dataset):
         if not (dataset == 'office-home-art' or dataset == 'office-home-clipart' or dataset == 'office-home-product' or dataset == 'office-home-real-world'):
             raise Exception("Parameter dataset's value must be office-home-art, office-home-clipart, office-home-product, or office-home-real-world. Case sensitive.")
 
-        self.root = 'data//'
+        self.root = 'data//office-home//'
         self.training = dataset + ".pkl"
         self.testing = dataset + "_eval.pkl"
         self.train = train
@@ -38,10 +38,10 @@ class Office_Home(data.Dataset):
             pre_process =  transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.5,), (0.5,))])
 
 
-            xs_train = torch.from_numpy(np.load(root + dataset + '//xs_train.npy'))
-            xs_test = torch.from_numpy(np.load(root + dataset + '//xs_test.npy'))
-            ys_train = torch.from_numpy(np.load(root + dataset + '//ys_train.npy'))
-            ys_test = torch.from_numpy(np.load(root + dataset + '//ys_test.npy'))
+            xs_train = torch.from_numpy(np.load(self.root + dataset + '//xs_train.npy'))
+            xs_test = torch.from_numpy(np.load(self.root + dataset + '//xs_test.npy'))
+            ys_train = torch.from_numpy(np.load(self.root + dataset + '//ys_train.npy'))
+            ys_test = torch.from_numpy(np.load(self.root + dataset + '//ys_test.npy'))
 
             torch.save(TensorDataset(xs_train, ys_train), self.root + self.training)
             torch.save(TensorDataset(xs_test, ys_test), self.root + self.testing)
