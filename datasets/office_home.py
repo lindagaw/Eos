@@ -49,6 +49,7 @@ class Office_Home(data.Dataset):
             data_set_train = torch.load(self.root + self.training)
             data_set_test = torch.load(self.root + self.testing)
 
+
         if not self._check_exists():
             raise RuntimeError("Dataset not found." +
                                " You can use download=True to download it")
@@ -102,7 +103,7 @@ class Office_Home(data.Dataset):
         data_set = torch.load(f)
 
         audios = torch.Tensor([np.asarray(audio) for _, (audio, _) in enumerate(data_set)])
-        labels = torch.Tensor([np.argmax(np.asarray(label)) for _, (_, label) in enumerate(data_set)])
+        labels = torch.Tensor([np.asarray(label) for _, (_, label) in enumerate(data_set)])
 
         self.dataset_size = labels.shape[0]
 
