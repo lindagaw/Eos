@@ -40,6 +40,9 @@ def eval_tgt_with_probe(encoder, critic, src_classifier, tgt_classifier, data_lo
         ys_pred.append(np.squeeze(pred))
         ys_true.append(np.squeeze(label.detach().cpu().numpy()))
 
+    print(ys_pred)
+    print(ys_true)
+
     acc = accuracy_score(ys_true, ys_pred)
 
 
