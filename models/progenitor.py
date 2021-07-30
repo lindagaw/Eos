@@ -27,7 +27,7 @@ class Progenitor(nn.Module):
         self.pool2 = nn.MaxPool2d(kernel_size=2)
 
         self.fc1 = nn.Linear(50 * 4 * 4, 500)
-        self.fc2 = nn.Linear(500, 65)
+        self.fc2 = nn.Linear(500, 10)
 
     def forward(self, input):
         """Forward the Progenitor."""
