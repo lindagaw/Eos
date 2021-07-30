@@ -102,7 +102,7 @@ class Duccessor_Activations(data.Dataset):
         data_set = torch.load(f)
 
         audios = torch.Tensor([np.asarray(audio) for _, (audio, _) in enumerate(data_set)])
-        labels = torch.Tensor([np.argmax(np.asarray(label)) for _, (_, label) in enumerate(data_set)])
+        labels = torch.Tensor([np.asarray(label) for _, (_, label) in enumerate(data_set)])
 
         self.dataset_size = labels.shape[0]
 
