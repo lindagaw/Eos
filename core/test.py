@@ -6,6 +6,8 @@ import torch.nn as nn
 from utils import make_variable
 from sklearn.metrics import accuracy_score
 
+import numpy as np
+
 def eval_tgt_with_probe(encoder, critic, src_classifier, tgt_classifier, data_loader):
     """Evaluation for target encoder by source classifier on target dataset."""
     # set eval state for Dropout and BN layers
