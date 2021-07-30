@@ -5,5 +5,6 @@ from .svhn import get_svhn
 
 from .descendant_activations import get_conv_1_activations
 from .successor_activations import get_conv_2_activations
+from .office_home import get_office_home
 
-__all__ = (get_usps, get_mnist, get_kmnist, get_svhn, get_conv_1_activations, get_conv_2_activations)
+__all__ = (get_usps, get_mnist, get_kmnist, get_svhn, get_conv_1_activations, get_conv_2_activations, get_office_home)
