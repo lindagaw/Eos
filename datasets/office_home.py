@@ -43,8 +43,6 @@ class Office_Home(data.Dataset):
             ys_train = torch.from_numpy(np.load(self.root + dataset + '//ys_train.npy'))
             ys_test = torch.from_numpy(np.load(self.root + dataset + '//ys_test.npy'))
 
-            print(ys_train)
-
             torch.save(TensorDataset(xs_train, ys_train), self.root + self.training)
             torch.save(TensorDataset(xs_test, ys_test), self.root + self.testing)
 
