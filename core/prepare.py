@@ -38,6 +38,8 @@ def train_progenitor(progenitor, data_loader):
             # zero gradients for optimizer
             optimizer.zero_grad()
 
+            print(labels)
+
             # compute loss for critic
             try:
                 preds = progenitor(images)
