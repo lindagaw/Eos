@@ -3,6 +3,7 @@
 import params
 from core import eval_src, eval_tgt, train_src, train_tgt, train_tgt_classifier
 from core import train_progenitor, eval_progenitor
+from core import eval_tgt_with_probe
 
 from activations import apply_descendant, apply_successor
 
@@ -127,3 +128,6 @@ if __name__ == '__main__':
     eval_tgt(src_encoder, src_classifier, tgt_conv_1_activations_data_loader_eval)
     print(">>> domain adaption <<<")
     eval_tgt(tgt_encoder, tgt_classifier, tgt_conv_1_activations_data_loader_eval)
+
+    print(">>> enhanced domain adaptation<<<")
+    eval_tgt_with_probe(tgt_encoder, critic, src_classifier, tgt_classifier, tgt_conv_1_activations_data_loader_eval)
