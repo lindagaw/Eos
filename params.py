@@ -10,13 +10,13 @@ batch_size = 50
 image_size = 64
 
 # params for source dataset
-src_dataset = "SVHN"
+src_dataset = "MNIST"
 src_encoder_restore = "snapshots/ADDA-source-encoder-final.pt"
 src_classifier_restore = "snapshots/ADDA-source-classifier-final.pt"
 src_model_trained = True
 
 # params for target dataset
-tgt_dataset = "MNIST"
+tgt_dataset = "USPS"
 tgt_encoder_restore = "snapshots/ADDA-target-encoder-final.pt"
 tgt_model_trained = True
 
