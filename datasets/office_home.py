@@ -118,7 +118,7 @@ def get_office_home(train, dataset):
 
     office_home_dataset = Office_Home(root=params.data_root,
                         train=train,
-                        #transform=pre_process,
+                        transform=pre_process,
                         download=True,
                         dataset=dataset)
 
