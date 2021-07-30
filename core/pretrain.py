@@ -1,11 +1,11 @@
 """Pre-train encoder and classifier for source dataset."""
-import torch
+
 import torch.nn as nn
 import torch.optim as optim
 
 import params
 from utils import make_variable, save_model
-from sklearn.metrics import accuracy_score
+
 
 def train_src(encoder, classifier, data_loader):
     """Train classifier for source domain."""
@@ -81,9 +81,6 @@ def eval_src(encoder, classifier, data_loader):
     loss = 0.0
     acc = 0.0
 
-    ys_pred = []
-    ys_true = []
-
     # set loss function
     criterion = nn.CrossEntropyLoss()
 
@@ -93,19 +90,12 @@ def eval_src(encoder, classifier, data_loader):
         labels = make_variable(labels)
 
         preds = classifier(encoder(images))
+        loss += criterion(preds, labels).data
 
-        for label, pred in zip(labels, preds):
-            pred = torch.argmax(pred)
-            ys_pred.append(pred)
-            ys_true.append(label)
+        pred_cls = preds.data.max(1)[1]
+        acc += pred_cls.eq(labels.data).cpu().sum()
 
-        #loss += criterion(preds, labels).data
-        #pred_cls = preds.data.max(1)[1]
-        #acc += pred_cls.eq(labels.data).cpu().sum()
-
-    #loss /= len(data_loader)
-    #acc /= len(data_loader.dataset)
-
-    acc = accuracy_score(ys_true, ys_pred)
+    loss /= len(data_loader)
+    acc /= len(data_loader.dataset)
 
     print("Avg Loss = {}, Avg Accuracy = {:2%}".format(loss, acc))
