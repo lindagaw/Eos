@@ -17,7 +17,7 @@ class Office_Home(data.Dataset):
         if not (dataset == 'office-home-art' or dataset == 'office-home-clipart' or dataset == 'office-home-product' or dataset == 'office-home-real-world'):
             raise Exception("Parameter dataset's value must be office-home-art, office-home-clipart, office-home-product, or office-home-real-world. Case sensitive.")
 
-        self.root = 'data//office-home//'
+        self.root = 'data//'
         self.training = dataset + ".pkl"
         self.testing = dataset + "_eval.pkl"
         self.train = train
