@@ -21,8 +21,8 @@ if __name__ == '__main__':
     init_random_seed(params.manual_seed)
 
     # load dataset
-    src_data_loader = get_office_home(dataset = 'office-home-art', train=True)
-    src_data_loader_eval = get_office_home(dataset = 'office-home-art', train=False)
+    src_data_loader = get_office_home(dataset = 'office-home-real-world', train=True)
+    src_data_loader_eval = get_office_home(dataset = 'office-home-real-world', train=False)
     tgt_data_loader = get_office_home(dataset = 'office-home-clipart', train=True)
     tgt_data_loader_eval = get_office_home(dataset = 'office-home-clipart', train=False)
 
