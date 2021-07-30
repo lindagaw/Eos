@@ -91,7 +91,7 @@ def eval_progenitor(progenitor, data_loader):
         labels = make_variable(labels).squeeze_()
 
         preds = progenitor(images)
-        loss += criterion(preds, labels).data
+        #loss += criterion(preds, labels).data
         pred_cls = preds.data.max(1)[1]
 
         acc += pred_cls.eq(labels.data).cpu().sum()
