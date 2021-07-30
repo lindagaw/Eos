@@ -21,9 +21,9 @@ if __name__ == '__main__':
     init_random_seed(params.manual_seed)
 
     # load dataset
-    src_data_loader = get_office_home(dataset = 'office-home-art')
+    src_data_loader = get_office_home(dataset = 'office-home-art', train=True)
     src_data_loader_eval = get_office_home(dataset = 'office-home-art', train=False)
-    tgt_data_loader = get_office_home(dataset = 'office-home-clipart')
+    tgt_data_loader = get_office_home(dataset = 'office-home-clipart', train=True)
     tgt_data_loader_eval = get_office_home(dataset = 'office-home-clipart', train=False)
 
     # train the original source classifier, the Progenitor
