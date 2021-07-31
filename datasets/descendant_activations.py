@@ -65,7 +65,7 @@ class Descendant_Activations(data.Dataset):
         self.train_data *= 255.0
         #self.train_data = self.train_data.transpose(2, 1)
 
-        print(self.train_data.shape)
+        #print(self.train_data.shape)
 
     def __getitem__(self, index):
         """Get images and target for data loader.
@@ -101,7 +101,7 @@ class Descendant_Activations(data.Dataset):
         data_set = torch.load(f)
 
         audios = torch.Tensor([np.asarray(audio) for _, (audio, _) in enumerate(data_set)])
-        labels = torch.Tensor([(np.asarray(label)) for _, (_, label) in enumerate(data_set)])
+        labels = torch.Tensor([np.squeeze(np.asarray(label)) for _, (_, label) in enumerate(data_set)])
 
         self.dataset_size = labels.shape[0]
 
