@@ -88,7 +88,7 @@ def train_tgt(src_encoder, tgt_encoder, critic,
             pred_tgt = critic(feat_tgt)
 
             # prepare fake labels
-            label_tgt = make_variable(torch.zeroes(feat_tgt.size(0)).long())
+            label_tgt = make_variable(torch.ones(feat_tgt.size(0)).long())
 
             # compute loss for target encoder
             loss_tgt = criterion(pred_tgt, label_tgt)
