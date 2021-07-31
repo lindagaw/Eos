@@ -70,8 +70,8 @@ def eval_tgt(encoder, classifier, data_loader):
         loss += criterion(preds, labels).data
 
         for pred, label in zip(preds, labels):
-            ys_pred.append(np.squeeze(pred))
-            ys_true.append(np.squeeze(label.detach().cpu().numpy()))
+            ys_pred.append(torch.argmax(pred).detach().cpu().numpy())
+            ys_true.append(label.detach().cpu().numpy())
 
     acc = accuracy_score(ys_true, ys_pred)
 
