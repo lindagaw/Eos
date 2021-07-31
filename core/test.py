@@ -70,6 +70,11 @@ def eval_tgt(encoder, classifier, data_loader):
         loss += criterion(preds, labels).data
 
         for pred, label in zip(preds, labels):
+
+            print('---------------')
+            print(pred)
+            print(label)
+            print('-----------------')
             ys_pred.append(torch.argmax(pred).detach().cpu().numpy())
             ys_true.append(label.detach().cpu().numpy())
 
