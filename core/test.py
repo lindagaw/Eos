@@ -167,42 +167,26 @@ def eval_tgt_with_probe(encoder, critic, src_classifier, tgt_classifier, data_lo
     print("Avg Accuracy = {:2%}".format(accuracy_score(y_true=ys_true, y_pred=ys_pred)))
 
 
-def eval_tgt(encoder, classifier, data_loader):
+def eval_tgt(tgt_encoder, classifier, data_loader):
     """Evaluation for target encoder by source classifier on target dataset."""
     # set eval state for Dropout and BN layers
-    encoder.eval()
+    tgt_encoder.eval()
     classifier.eval()
-
     # init loss and accuracy
     loss = 0.0
     acc = 0.0
-
-    ys_true = []
-    ys_pred = []
-
     # set loss function
     criterion = nn.CrossEntropyLoss()
-
     # evaluate network
     for (images, labels) in data_loader:
         images = make_variable(images, volatile=True)
         labels = make_variable(labels).squeeze_()
-
-        preds = classifier(encoder(images))
+        torch.no_grad()
+        preds = classifier(tgt_encoder(images))
         loss += criterion(preds, labels).data
 
-        for pred, label in zip(preds, labels):
-
-            print('---------------')
-            print(pred)
-            print(label)
-            print('-----------------')
-            ys_pred.append(torch.argmax(pred).detach().cpu().numpy())
-            ys_true.append(label.detach().cpu().numpy())
-
-    acc = accuracy_score(ys_true, ys_pred)
-
+        pred_cls = preds.data.max(1)[1]
+        acc += pred_cls.eq(labels.data).cpu().sum()
     loss /= len(data_loader)
-    #acc /= len(data_loader.dataset)
-
+    acc /= len(data_loader.dataset)
     print("Avg Loss = {}, Avg Accuracy = {:2%}".format(loss, acc))
