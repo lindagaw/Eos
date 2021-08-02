@@ -8,6 +8,8 @@ from sklearn.metrics import accuracy_score
 
 import numpy as np
 
+import os
+
 def get_distribution(src_encoder, tgt_encoder, src_classifier, tgt_classifier, critic, data_loader, which_data_loader):
 
     if os.path.isfile('snapshots//' + which_data_loader + '_mahalanobis_std.npy') and \
