@@ -1,5 +1,5 @@
 """Main script for ADDA."""
-
+import pretty_errors
 import params
 from core import eval_src, eval_tgt, train_src, train_tgt, train_tgt_classifier
 from core import train_progenitor, eval_progenitor

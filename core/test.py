@@ -7,7 +7,7 @@ from utils import make_variable
 from sklearn.metrics import accuracy_score
 
 import numpy as np
-
+from scipy.spatial import distance
 import os
 
 def get_distribution(src_encoder, tgt_encoder, src_classifier, tgt_classifier, critic, data_loader, which_data_loader):
