@@ -34,32 +34,15 @@ if __name__ == '__main__':
     progenitor = train_progenitor(progenitor, src_data_loader)
     eval_progenitor(progenitor, src_data_loader_eval)
 
-    print(">>> load the chopped model with 1 conv, the Descendant <<<")
-    descendant = load_chopped_state_dict(model=Descendant(), pretrained_dict=params.progenitor_restore)
-    print(descendant)
-
     print(">>> load the chopped model with 2 convs, the Successor <<<")
     successor = load_chopped_state_dict(model=Successor(), pretrained_dict=params.progenitor_restore)
     print(successor)
-
-    print(">>> get the activations after the 1st conv, using Descendant <<<")
-
-    apply_descendant(descendant, src_data_loader, 'src', 'dev')
-    apply_descendant(descendant, src_data_loader_eval, 'src', 'eval')
-    apply_descendant(descendant, tgt_data_loader, 'tgt', 'dev')
-    apply_descendant(descendant, tgt_data_loader_eval, 'tgt', 'eval')
 
     print(">>> get the activations after the 2nd conv, using Successor <<<")
     apply_successor(successor, src_data_loader, 'src', 'dev')
     apply_successor(successor, src_data_loader_eval, 'src', 'eval')
     apply_successor(successor, tgt_data_loader, 'tgt', 'dev')
     apply_successor(successor, tgt_data_loader_eval, 'tgt', 'eval')
-
-    print(">>> construct dataloader after activations from 1st conv <<<")
-    src_conv_1_activations_data_loader = get_conv_1_activations(train=True, dataset='src')
-    src_conv_1_activations_data_loader_eval = get_conv_1_activations(train=False, dataset='src')
-    tgt_conv_1_activations_data_loader = get_conv_1_activations(train=True, dataset='tgt')
-    tgt_conv_1_activations_data_loader_eval = get_conv_1_activations(train=False, dataset='tgt')
 
     print(">>> construct dataloader after activations from 2nd conv <<<")
     src_conv_2_activations_data_loader = get_conv_2_activations(train=True, dataset='src')
@@ -124,9 +107,14 @@ if __name__ == '__main__':
 
     # eval target encoder on test set of target dataset
     print("=== Evaluating classifier for encoded target domain ===")
-    print(">>> source only <<<")
+    print(">>> only source encoder <<<")
     eval_tgt(src_encoder, src_classifier, tgt_conv_2_activations_data_loader_eval)
-    print(">>> domain adaption <<<")
-    eval_tgt(tgt_encoder, tgt_classifier, tgt_conv_2_activations_data_loader_eval)
+
+    get_distribution(src_encoder, tgt_encoder, src_classifier, tgt_classifier, critic, src_conv_2_activations_data_loader, 'src')
+    get_distribution(src_encoder, tgt_encoder, src_classifier, tgt_classifier, critic, tgt_conv_2_activations_data_loader, 'tgt')
+
+    print(">>> source + target encoders <<<")
+    eval_ADDA(src_encoder, tgt_encoder, src_classifier, tgt_classifier, critic, tgt_conv_2_activations_data_loader_eval)
+
     print(">>> enhanced domain adaptation<<<")
     eval_tgt_with_probe(tgt_encoder, critic, src_classifier, tgt_classifier, tgt_conv_2_activations_data_loader_eval)
