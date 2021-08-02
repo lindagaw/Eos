@@ -48,7 +48,7 @@ class LeNet_Conv_2_Classifier(nn.Module):
     def __init__(self):
         """Init LeNet_Conv_2_ encoder."""
         super(LeNet_Conv_2_Classifier, self).__init__()
-        self.fc2 = nn.Linear(500, 10)
+        self.fc2 = nn.Linear(500, 65)
 
     def forward(self, feat):
         """Forward the LeNet_Conv_2_ classifier."""
