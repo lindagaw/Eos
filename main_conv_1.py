@@ -111,14 +111,13 @@ if __name__ == '__main__':
     # eval target encoder on test set of target dataset
     print("=== Evaluating classifier for encoded target domain ===")
     print(">>> only source encoder <<<")
-    eval_tgt(src_encoder, src_classifier, tgt_data_loader_eval)
+    eval_tgt(src_encoder, src_classifier, tgt_conv_1_activations_data_loader_eval)
 
-    get_distribution(src_encoder, tgt_encoder, src_classifier, tgt_classifier, critic, src_data_loader, 'src')
-    get_distribution(src_encoder, tgt_encoder, src_classifier, tgt_classifier, critic, tgt_data_loader, 'tgt')
-
+    get_distribution(src_encoder, tgt_encoder, src_classifier, tgt_classifier, critic, src_conv_1_activations_data_loader, 'src')
+    get_distribution(src_encoder, tgt_encoder, src_classifier, tgt_classifier, critic, tgt_conv_1_activations_data_loader, 'tgt')
 
     print(">>> source + target encoders <<<")
-    eval_ADDA(src_encoder, tgt_encoder, src_classifier, tgt_classifier, critic, tgt_data_loader_eval)
+    eval_ADDA(src_encoder, tgt_encoder, src_classifier, tgt_classifier, critic, tgt_conv_1_activations_data_loader_eval)
 
     print(">>> enhanced domain adaptation<<<")
-    eval_tgt_with_probe(tgt_encoder, critic, src_classifier, tgt_classifier, tgt_data_loader_eval)
+    eval_tgt_with_probe(tgt_encoder, critic, src_classifier, tgt_classifier, tgt_conv_1_activations_data_loader_eval)
