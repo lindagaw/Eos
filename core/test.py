@@ -230,16 +230,14 @@ def eval_tgt(encoder, classifier, data_loader):
         preds = classifier(encoder(images))
         loss += criterion(preds, labels).data
 
+        print(labels)
+        print(preds)
+
         for pred, label in zip(preds, labels):
             ys_pred.append(torch.argmax(pred).detach().cpu().numpy())
             ys_true.append(label.detach().cpu().numpy())
 
     acc = accuracy_score(ys_true, ys_pred)
-
-    print('------------')
-    print(ys_true)
-    print(ys_pred)
-    print('-------------')
 
     loss /= len(data_loader)
     #acc /= len(data_loader.dataset)
