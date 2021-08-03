@@ -6,7 +6,7 @@ from core import eval_src, eval_tgt, train_src, train_tgt, train_tgt_classifier
 from core import train_progenitor, eval_progenitor
 from core import eval_tgt_with_probe
 from activations import apply_descendant, apply_successor
-
+from core import get_distribution, eval_ADDA
 from models import Discriminator, LeNetClassifier, LeNetEncoder
 from models import Progenitor, Descendant, Successor
 from models import LeNet_Conv_1_Encoder, LeNet_Conv_1_Classifier, LeNet_Conv_2_Encoder, LeNet_Conv_2_Classifier

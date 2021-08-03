@@ -43,10 +43,6 @@ class Duccessor_Activations(data.Dataset):
             ys_train = torch.from_numpy(np.load('snapshots//' + dataset + '_dev_2nd_conv_activations_labels.npy'))
             ys_test = torch.from_numpy(np.load('snapshots//' + dataset + '_eval_2nd_conv_activations_labels.npy'))
 
-            print('-----')
-            print(ys_test)
-            print('-----')
-
             torch.save(TensorDataset(xs_train, ys_train), self.root + self.training)
             torch.save(TensorDataset(xs_test, ys_test), self.root + self.testing)
 
@@ -105,7 +101,7 @@ class Duccessor_Activations(data.Dataset):
         data_set = torch.load(f)
 
         audios = torch.Tensor([np.asarray(audio) for _, (audio, _) in enumerate(data_set)])
-        labels = torch.Tensor([np.argmax(np.asarray(label)) for _, (_, label) in enumerate(data_set)])
+        labels = torch.Tensor([np.asarray(label)[0] for _, (_, label) in enumerate(data_set)])
 
         self.dataset_size = labels.shape[0]
 
