@@ -236,6 +236,11 @@ def eval_tgt(encoder, classifier, data_loader):
 
     acc = accuracy_score(ys_true, ys_pred)
 
+    print('------------')
+    print(ys_true)
+    print(ys_pred)
+    print('-------------')
+
     loss /= len(data_loader)
     #acc /= len(data_loader.dataset)
 
