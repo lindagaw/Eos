@@ -43,6 +43,9 @@ class Duccessor_Activations(data.Dataset):
             ys_train = torch.from_numpy(np.load('snapshots//' + dataset + '_dev_2nd_conv_activations_labels.npy'))
             ys_test = torch.from_numpy(np.load('snapshots//' + dataset + '_eval_2nd_conv_activations_labels.npy'))
 
+            print('-----')
+            print(ys_test)
+            print('-----')
 
             torch.save(TensorDataset(xs_train, ys_train), self.root + self.training)
             torch.save(TensorDataset(xs_test, ys_test), self.root + self.testing)
