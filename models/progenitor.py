@@ -40,7 +40,8 @@ class Progenitor(nn.Module):
         conv_out = self.conv_mid_4(self.conv_mid_3(self.conv_mid_2(self.conv_mid_1(conv_out))))
         conv_out = F.relu(self.pool2(self.dropout2(self.conv2(conv_out))))
 
-        feat = self.fc1(conv_out.view(-1, 4096 * 4 * 4))
+        #feat = self.fc1(conv_out.view(-1, 4096 * 4 * 4))
+        feat = self.fc1(conv_out)
         out = F.dropout(F.relu(feat), training=self.training)
         out = self.fc2(out)
         return out
