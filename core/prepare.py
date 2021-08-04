@@ -92,10 +92,7 @@ def eval_progenitor(progenitor, data_loader):
         preds = progenitor(images)
         #print(preds.shape)
         #print(labels.shape)
-        try:
-            loss += criterion(preds, labels).data
-        except:
-            loss += criterion(preds, torch.unsqueeze(labels, 1)).data
+        #loss += criterion(preds, labels).data
         pred_cls = preds.data.max(1)[1]
 
         acc += pred_cls.eq(labels.data).cpu().sum()
