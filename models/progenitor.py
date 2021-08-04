@@ -26,11 +26,11 @@ class Progenitor(nn.Module):
         self.conv_mid_2 = nn.Conv2d(256, 256, kernel_size=1)
         self.conv_mid_3 = nn.Conv2d(256, 128, kernel_size=1)
 
-        self.conv2 = nn.Conv2d(128, 50, kernel_size=5)
+        self.conv2 = nn.Conv2d(128, 4096, kernel_size=5)
         self.dropout2 = nn.Dropout2d()
         self.pool2 = nn.MaxPool2d(kernel_size=2)
 
-        self.fc1 = nn.Linear(50 * 4 * 4, 500)
+        self.fc1 = nn.Linear(4096 * 4 * 4, 500)
         self.fc2 = nn.Linear(500, 65)
 
     def forward(self, input):
@@ -39,7 +39,7 @@ class Progenitor(nn.Module):
         conv_out = self.conv_mid_3(self.conv_mid_2(self.conv_mid_1(conv_out)))
         conv_out = F.relu(self.pool2(self.dropout2(self.conv2(conv_out))))
 
-        feat = self.fc1(conv_out.view(-1, 50 * 4 * 4))
+        feat = self.fc1(conv_out.view(-1, 4096 * 4 * 4))
         out = F.dropout(F.relu(feat), training=self.training)
         out = self.fc2(out)
         return out
