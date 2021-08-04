@@ -17,6 +17,10 @@ from utils import get_data_loader, init_model, init_random_seed, load_chopped_st
 
 from datasets import get_conv_1_activations, get_conv_2_activations
 from datasets import get_office_home
+
+import torch
+torch.cuda.empty_cache()
+
 if __name__ == '__main__':
     # init random seed
     init_random_seed(params.manual_seed)
