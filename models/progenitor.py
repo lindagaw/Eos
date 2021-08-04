@@ -47,5 +47,5 @@ class Progenitor(nn.Module):
         conv_out = F.relu(self.pool12(self.conv11((self.conv10(conv_out)))))
         conv_out = F.relu(self.pool15(self.conv14((self.conv13(conv_out)))))
 
-        out = self.fc3(self.fc2(self.fc1(out)))
+        out = self.fc3(self.fc2(self.fc1(conv_out)))
         return out
