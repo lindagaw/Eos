@@ -13,7 +13,7 @@ class Progenitor(nn.Module):
 
         self.restored = False
 
-        self.conv1 = nn.Conv2d(1, 64, kernel_size=3)
+        self.conv1 = nn.Conv2d(3, 64, kernel_size=3)
         self.conv2 = nn.Conv2d(64, 64, kernel_size=3)
         self.pool3 = nn.MaxPool2d(kernel_size=1)
 
