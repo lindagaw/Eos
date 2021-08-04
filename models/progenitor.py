@@ -13,39 +13,28 @@ class Progenitor(nn.Module):
 
         self.restored = False
 
-        self.conv1 = nn.Conv2d(3, 64, kernel_size=3)
-        self.conv2 = nn.Conv2d(64, 64, kernel_size=3)
-        self.pool3 = nn.MaxPool2d(kernel_size=1)
 
-        self.conv4 = nn.Conv2d(64, 128, kernel_size=3)
-        self.conv5 = nn.Conv2d(128, 128, kernel_size=3)
-        self.pool6 = nn.MaxPool2d(kernel_size=1)
+        # 1st conv layer
+        # input [1 x 28 x 28]
+        # output [20 x 12 x 12]
+        self.conv1 = nn.Conv2d(3, 128, kernel_size=5)
+        self.pool1 = nn.MaxPool2d(kernel_size=2)
+        # 2nd conv layer
+        # input [20 x 12 x 12]
+        # output [50 x 4 x 4]
+        self.conv2 = nn.Conv2d(128, 256, kernel_size=5)
+        self.dropout2 = nn.Dropout2d()
+        self.pool2 = nn.MaxPool2d(kernel_size=2)
 
-        self.conv7 = nn.Conv2d(128, 256, kernel_size=3)
-        self.conv8 = nn.Conv2d(256, 256, kernel_size=3)
-        self.pool9 = nn.MaxPool2d(kernel_size=1)
-
-        self.conv10 = nn.Conv2d(256, 512, kernel_size=3)
-        self.conv11 = nn.Conv2d(512, 512, kernel_size=3)
-        self.pool12 = nn.MaxPool2d(kernel_size=1)
-
-        self.conv13 = nn.Conv2d(512, 512, kernel_size=3)
-        self.conv14 = nn.Conv2d(512, 512, kernel_size=3)
-        self.pool15 = nn.MaxPool2d(kernel_size=1)
-
-
-
-        self.fc1 = nn.Linear(512, 4096)
-        self.fc2 = nn.Linear(4096, 4096)
-        self.fc3 = nn.Linear(4096, 65)
+        self.fc1 = nn.Linear(256, 500)
+        self.fc2 = nn.Linear(500, 65)
 
     def forward(self, input):
         """Forward the Progenitor."""
-        conv_out = F.relu(self.pool3(self.conv2((self.conv1(input)))))
-        conv_out = F.relu(self.pool6(self.conv5((self.conv4(conv_out)))))
-        conv_out = F.relu(self.pool9(self.conv8((self.conv7(conv_out)))))
-        conv_out = F.relu(self.pool12(self.conv11((self.conv10(conv_out)))))
-        conv_out = F.relu(self.pool15(self.conv14((self.conv13(conv_out)))))
+        conv_out = F.relu(self.pool1(self.conv1(input)))
+        conv_out = F.relu(self.pool2(self.dropout2(self.conv2(conv_out))))
 
-        out = self.fc3(self.fc2(self.fc1(conv_out)))
+        feat = self.fc1(conv_out.view(-1, 256))
+        out = F.dropout(F.relu(feat), training=self.training)
+        out = self.fc2(out)
         return out
