@@ -26,7 +26,7 @@ class Progenitor(nn.Module):
         self.dropout2 = nn.Dropout2d()
         self.pool2 = nn.MaxPool2d(kernel_size=2)
 
-        self.fc1 = nn.Linear(50 * 4 * 4, 500)
+        self.fc1 = nn.Linear(202500, 500)
         self.fc2 = nn.Linear(500, 65)
 
     def forward(self, input):
