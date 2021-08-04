@@ -22,6 +22,10 @@ class Progenitor(nn.Module):
         # 2nd conv layer
         # input [20 x 12 x 12]
         # output [50 x 4 x 4]
+        self.conv_mid_1 = nn.Conv2d(128, 256, kernel_size=1)
+        self.conv_mid_2 = nn.Conv2d(256, 256, kernel_size=1)
+        self.conv_mid_3 = nn.Conv2d(256, 128, kernel_size=1)
+
         self.conv2 = nn.Conv2d(128, 50, kernel_size=5)
         self.dropout2 = nn.Dropout2d()
         self.pool2 = nn.MaxPool2d(kernel_size=2)
@@ -32,6 +36,7 @@ class Progenitor(nn.Module):
     def forward(self, input):
         """Forward the Progenitor."""
         conv_out = F.relu(self.pool1(self.conv1(input)))
+        conv_out = self.conv_mid_3(self.conv_mid_2(self.conv_mid_1(conv_out)))
         conv_out = F.relu(self.pool2(self.dropout2(self.conv2(conv_out))))
 
         feat = self.fc1(conv_out.view(-1, 50 * 4 * 4))
