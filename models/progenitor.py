@@ -34,7 +34,7 @@ class Progenitor(nn.Module):
         conv_out = F.relu(self.pool1(self.conv1(input)))
         conv_out = F.relu(self.pool2(self.dropout2(self.conv2(conv_out))))
 
-        feat = self.fc1(conv_out.view(-1, 50 * 4 * 4))
+        feat = self.fc1(conv_out.view(-1, 202500))
         out = F.dropout(F.relu(feat), training=self.training)
         out = self.fc2(out)
         return out
