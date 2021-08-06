@@ -30,9 +30,9 @@ class Progenitor(nn.Module):
         self.conv11 = nn.Conv2d(512, 512, kernel_size=3)
         self.pool12 = nn.MaxPool2d(kernel_size=2)
 
-        self.conv13 = nn.Conv2d(512, 512, kernel_size=3)
-        self.conv14 = nn.Conv2d(512, 512, kernel_size=3)
-        self.pool15 = nn.MaxPool2d(kernel_size=2)
+        self.conv13 = nn.Conv2d(512, 512, kernel_size=1)
+        self.conv14 = nn.Conv2d(512, 512, kernel_size=1)
+        self.pool15 = nn.MaxPool2d(kernel_size=1)
 
         self.flatten = nn.Flatten()
 
