@@ -36,7 +36,7 @@ class Progenitor(nn.Module):
 
         self.flatten = nn.Flatten()
 
-        self.fc1 = nn.Linear(512, 4096)
+        self.fc1 = nn.Linear(512*3*3, 4096)
         self.fc2 = nn.Linear(4096, 4096)
         self.fc3 = nn.Linear(4096, 65)
 
@@ -49,7 +49,7 @@ class Progenitor(nn.Module):
         conv_out = F.relu(self.conv14(F.relu(self.conv13(conv_out))))
 
 
-        print(conv_out.shape)
+        #print(conv_out.shape)
         #feat = self.fc1(conv_out.view(-1, 128*29*29))
 
         feat = self.fc3(F.relu(self.fc2(F.relu(self.fc1(self.flatten(conv_out))))))
