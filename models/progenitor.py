@@ -36,9 +36,9 @@ class Progenitor(nn.Module):
 
         self.flatten = nn.Flatten()
 
-        self.fc1 = nn.Linear(512*3*3, 4096)
-        self.fc2 = nn.Linear(4096, 4096)
-        self.fc3 = nn.Linear(4096, 65)
+        self.fc1 = nn.Linear(512*3*3, 1024)
+        self.fc2 = nn.Linear(1024, 1024)
+        self.fc3 = nn.Linear(1024, 65)
 
     def forward(self, input):
         """Forward the Progenitor."""
@@ -46,7 +46,7 @@ class Progenitor(nn.Module):
         conv_out = self.pool6(F.relu(self.conv5(F.relu(self.conv4(conv_out)))))
         conv_out = self.pool9(F.relu(self.conv8(F.relu(self.conv7(conv_out)))))
         conv_out = self.pool12(F.relu(self.conv11(F.relu(self.conv10(conv_out)))))
-        conv_out = F.relu(self.conv14(F.relu(self.conv13(conv_out))))
+        conv_out = self.pool13(F.relu(self.conv14(F.relu(self.conv13(conv_out)))))
 
 
         print(conv_out.shape)
