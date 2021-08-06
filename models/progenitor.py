@@ -36,9 +36,9 @@ class Progenitor(nn.Module):
 
         self.flatten = nn.Flatten()
 
-        self.fc1 = nn.Linear(512*3*3, 1024)
-        self.fc2 = nn.Linear(1024, 1024)
-        self.fc3 = nn.Linear(1024, 65)
+        self.fc1 = nn.Linear(512*3*3, 512)
+        self.fc2 = nn.Linear(512, 512)
+        self.fc3 = nn.Linear(512, 65)
 
     def forward(self, input):
         """Forward the Progenitor."""
