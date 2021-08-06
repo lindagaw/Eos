@@ -19,6 +19,9 @@ from datasets import get_conv_1_activations, get_conv_2_activations
 from datasets import get_office_home
 
 import torch
+
+import gc
+gc.collect()
 torch.cuda.empty_cache()
 
 if __name__ == '__main__':
