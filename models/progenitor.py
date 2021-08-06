@@ -46,10 +46,10 @@ class Progenitor(nn.Module):
         conv_out = self.pool6(F.relu(self.conv5(F.relu(self.conv4(conv_out)))))
         conv_out = self.pool9(F.relu(self.conv8(F.relu(self.conv7(conv_out)))))
         conv_out = self.pool12(F.relu(self.conv11(F.relu(self.conv10(conv_out)))))
-        conv_out = self.pool15(F.relu(self.conv14(F.relu(self.conv13(conv_out)))))
+        conv_out = self.pool13(F.relu(self.conv14(F.relu(self.conv13(conv_out)))))
 
 
-        #print(conv_out.shape)
+        print(conv_out.shape)
         #feat = self.fc1(conv_out.view(-1, 128*29*29))
 
         feat = self.fc3(F.relu(self.fc2(F.relu(self.fc1(self.flatten(conv_out))))))
