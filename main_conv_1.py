@@ -34,10 +34,10 @@ if __name__ == '__main__':
     #tgt_data_loader = get_data_loader(params.tgt_dataset)
     #tgt_data_loader_eval = get_data_loader(params.tgt_dataset, train=False)
 
-    src_data_loader = get_office_home(dataset = 'office-home-art', train=True)
-    src_data_loader_eval = get_office_home(dataset = 'office-home-art', train=False)
-    tgt_data_loader = get_office_home(dataset = 'office-home-clipart', train=True)
-    tgt_data_loader_eval = get_office_home(dataset = 'office-home-clipart', train=False)
+    src_data_loader = get_office_home(dataset = 'office-home-clipart', train=True)
+    src_data_loader_eval = get_office_home(dataset = 'office-home-clipart', train=False)
+    tgt_data_loader = get_office_home(dataset = 'office-home-art', train=True)
+    tgt_data_loader_eval = get_office_home(dataset = 'office-home-art', train=False)
 
     # train the original source classifier, the Progenitor
     print(">>> the original source classifier, the Progenitor <<<")

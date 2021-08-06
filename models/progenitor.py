@@ -49,7 +49,7 @@ class Progenitor(nn.Module):
         conv_out = self.pool15(F.relu(self.conv14(F.relu(self.conv13(conv_out)))))
 
 
-        print(conv_out.shape)
+        #print(conv_out.shape)
         #feat = self.fc1(conv_out.view(-1, 128*29*29))
 
         feat = self.fc3(F.relu(self.fc2(F.relu(self.fc1(self.flatten(conv_out))))))
