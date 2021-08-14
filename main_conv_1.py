@@ -16,7 +16,7 @@ from models import LeNet_Conv_1_Encoder, LeNet_Conv_1_Classifier, LeNet_Conv_2_E
 from utils import get_data_loader, init_model, init_random_seed, load_chopped_state_dict
 
 from datasets import get_conv_1_activations, get_conv_2_activations
-from datasets import get_office_home
+from datasets import get_office_home, get_office_31
 
 import torch
 
@@ -34,10 +34,10 @@ if __name__ == '__main__':
     #tgt_data_loader = get_data_loader(params.tgt_dataset)
     #tgt_data_loader_eval = get_data_loader(params.tgt_dataset, train=False)
 
-    src_data_loader = get_office_home(dataset = 'office-home-clipart', train=True)
-    src_data_loader_eval = get_office_home(dataset = 'office-home-clipart', train=False)
-    tgt_data_loader = get_office_home(dataset = 'office-home-art', train=True)
-    tgt_data_loader_eval = get_office_home(dataset = 'office-home-art', train=False)
+    src_data_loader = get_office_home(dataset = 'office-31-amazon', train=True)
+    src_data_loader_eval = get_office_home(dataset = 'office-31-amazon', train=False)
+    tgt_data_loader = get_office_home(dataset = 'office-31-webcam', train=True)
+    tgt_data_loader_eval = get_office_home(dataset = 'office-31-webcam', train=False)
 
     # train the original source classifier, the Progenitor
     print(">>> the original source classifier, the Progenitor <<<")
