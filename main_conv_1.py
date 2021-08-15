@@ -34,10 +34,10 @@ if __name__ == '__main__':
     #tgt_data_loader = get_data_loader(params.tgt_dataset)
     #tgt_data_loader_eval = get_data_loader(params.tgt_dataset, train=False)
 
-    src_data_loader = get_office_home(dataset = 'office-31-amazon', train=True)
-    src_data_loader_eval = get_office_home(dataset = 'office-31-amazon', train=False)
-    tgt_data_loader = get_office_home(dataset = 'office-31-webcam', train=True)
-    tgt_data_loader_eval = get_office_home(dataset = 'office-31-webcam', train=False)
+    src_data_loader = get_office_31(dataset = 'office-31-amazon', train=True)
+    src_data_loader_eval = get_office_31(dataset = 'office-31-amazon', train=False)
+    tgt_data_loader = get_office_31(dataset = 'office-31-webcam', train=True)
+    tgt_data_loader_eval = get_office_31(dataset = 'office-31-webcam', train=False)
 
     # train the original source classifier, the Progenitor
     print(">>> the original source classifier, the Progenitor <<<")
