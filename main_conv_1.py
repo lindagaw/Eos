@@ -1,6 +1,9 @@
 """Main script for ADDA."""
 import pretty_errors
 import params
+
+from torchvision import datasets, transforms, models
+
 from core import eval_src, eval_tgt, train_src, train_tgt, train_tgt_classifier
 from core import train_progenitor, eval_progenitor
 from core import eval_tgt_with_probe
@@ -11,7 +14,6 @@ from activations import apply_descendant, apply_successor
 from models import Discriminator, LeNetClassifier, LeNetEncoder
 from models import Progenitor, Descendant, Successor
 from models import LeNet_Conv_1_Encoder, LeNet_Conv_1_Classifier, LeNet_Conv_2_Encoder, LeNet_Conv_2_Classifier
-
 
 from utils import get_data_loader, init_model, init_random_seed, load_chopped_state_dict
 
@@ -39,7 +41,7 @@ if __name__ == '__main__':
     tgt_data_loader = get_office_31(dataset = 'office-31-webcam', train=True)
     tgt_data_loader_eval = get_office_31(dataset = 'office-31-webcam', train=False)
 
-    model = torch.hub.load('pytorch/vision:v0.10.0', 'vgg11', pretrained=True)
+    model = model = models.resnet152(pretrained=True)
     newmodel = torch.nn.Sequential(*(list(model.children())[:-1]))
     print(newmodel)
 
