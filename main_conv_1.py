@@ -57,7 +57,7 @@ if __name__ == '__main__':
 
 
     print(">>> load the chopped model with 1 conv, the Descendant <<<")
-    descendant = nn.Sequential(*[progenitor.features[i] for i in range(1)])
+    descendant = torch.nn.Sequential(*[progenitor.features[i] for i in range(1)])
     print(descendant)
 
 
