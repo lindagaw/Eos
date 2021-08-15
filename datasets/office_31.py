@@ -17,7 +17,7 @@ class Office_31(data.Dataset):
         if not (dataset == 'office-31-amazon' or dataset == 'office-31-dslr' or dataset == 'office-31-webcam'):
             raise Exception("Parameter dataset's value must be 'office-31-amazon', 'office-31-dslr', 'office-31-webcam'. Case sensitive.")
 
-        self.root = 'data//office-home//'
+        self.root = 'data//office-31//'
         self.training = dataset + ".pkl"
         self.testing = dataset + "_eval.pkl"
         self.train = train
