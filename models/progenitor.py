@@ -13,7 +13,7 @@ class Progenitor(nn.Module):
 
         self.restored = False
 
-        
+
         self.conv1 = nn.Conv2d(3, 64, kernel_size=3)
         self.conv2 = nn.Conv2d(64, 64, kernel_size=3)
         self.pool3 = nn.MaxPool2d(kernel_size=2)
@@ -36,9 +36,9 @@ class Progenitor(nn.Module):
 
         self.flatten = nn.Flatten()
 
-        self.fc1 = nn.Linear(512*3*3, 512)
-        self.fc2 = nn.Linear(512, 512)
-        self.fc3 = nn.Linear(512, 65)
+        self.fc1 = nn.Linear(512*3*3, 4096)
+        self.fc2 = nn.Linear(4096, 4096)
+        self.fc3 = nn.Linear(4096, 31)
 
     def forward(self, input):
         """Forward the Progenitor."""
