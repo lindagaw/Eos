@@ -14,8 +14,8 @@ class Office_31(data.Dataset):
     def __init__(self, root, train=True, transform=None, download=False, dataset='undefined'):
         """Init USPS dataset."""
 
-        if not (dataset == 'office-31-amazon' or dataset == 'office-31-dlsr' or dataset == 'office-31-webcam'):
-            raise Exception("Parameter dataset's value must be 'office-31-amazon', 'office-31-dlsr', 'office-31-webcam'. Case sensitive.")
+        if not (dataset == 'office-31-amazon' or dataset == 'office-31-dslr' or dataset == 'office-31-webcam'):
+            raise Exception("Parameter dataset's value must be 'office-31-amazon', 'office-31-dslr', 'office-31-webcam'. Case sensitive.")
 
         self.root = 'data//office-home//'
         self.training = dataset + ".pkl"
