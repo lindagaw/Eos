@@ -39,6 +39,11 @@ if __name__ == '__main__':
     tgt_data_loader = get_office_31(dataset = 'office-31-webcam', train=True)
     tgt_data_loader_eval = get_office_31(dataset = 'office-31-webcam', train=False)
 
+    model = torch.hub.load('pytorch/vision:v0.10.0', 'vgg11', pretrained=True)
+    newmodel = torch.nn.Sequential(*(list(model.children())[:-1]))
+    print(newmodel)
+
+'''
     # train the original source classifier, the Progenitor
     print(">>> the original source classifier, the Progenitor <<<")
     progenitor = init_model(net=Progenitor(),
@@ -133,3 +138,4 @@ if __name__ == '__main__':
 
     print(">>> enhanced domain adaptation<<<")
     eval_tgt_with_probe(tgt_encoder, critic, src_classifier, tgt_classifier, tgt_conv_1_activations_data_loader_eval)
+'''
