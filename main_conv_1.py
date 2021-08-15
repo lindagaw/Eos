@@ -41,20 +41,15 @@ if __name__ == '__main__':
     tgt_data_loader = get_office_31(dataset = 'office-31-webcam', train=True)
     tgt_data_loader_eval = get_office_31(dataset = 'office-31-webcam', train=False)
 
-    model = model = models.resnet152(pretrained=True)
-    model.fc = torch.nn.Linear(4096, 31)
+    progenitor models.resnet152(pretrained=True)
+    progenitor.fc = torch.nn.Linear(4096, 31)
     #newmodel = torch.nn.Sequential(*(list(model.children())[:-1]))
-    print(model)
-
-'''
-    # train the original source classifier, the Progenitor
-    print(">>> the original source classifier, the Progenitor <<<")
-    progenitor = init_model(net=Progenitor(),
-                             restore=params.progenitor_restore)
     print(progenitor)
+
+
     progenitor = train_progenitor(progenitor, src_data_loader)
     eval_progenitor(progenitor, src_data_loader_eval)
-
+'''
     print(">>> load the chopped model with 1 conv, the Descendant <<<")
     descendant = load_chopped_state_dict(model=Descendant(), pretrained_dict=params.progenitor_restore)
     print(descendant)
