@@ -48,10 +48,7 @@ if __name__ == '__main__':
     #newmodel = torch.nn.Sequential(*(list(model.children())[:-1]))
     print(progenitor)
 
-    try:
-        progenitor = init_model(net=progenitor, restore=params.progenitor_restore)
-    except:
-        progenitor = train_progenitor(progenitor, src_data_loader)
+    progenitor = train_progenitor(progenitor, src_data_loader, src_data_loader_eval)
 
     eval_progenitor(progenitor, src_data_loader_eval)
 
@@ -78,14 +75,12 @@ if __name__ == '__main__':
     print(">>> train the src_encoder, tgt_encoder, src_classifier, tgt_classifier <<<")
 
     # load models
-    src_encoder = init_model(net=LeNet_Conv_1_Encoder(),
-                             restore=params.src_encoder_restore)
-    src_classifier = init_model(net=LeNet_Conv_1_Classifier(),
-                                restore=params.src_classifier_restore)
-    tgt_classifier = init_model(net=LeNet_Conv_1_Classifier(),
-                                restore='')
-    tgt_encoder = init_model(net=LeNet_Conv_1_Encoder(),
-                             restore=params.tgt_encoder_restore)
+    src_encoder = torch.nn.Sequential(*(list(model.children())[1:-1]))
+
+    src_classifier = torch.nn.Linear(4096, 31)
+    tgt_classifier = torch.nn.Linear(4096, 31)
+    tgt_encoder = torch.nn.Sequential(*(list(model.children())[1:-1]))
+
     critic = init_model(Discriminator(input_dims=params.d_input_dims,
                                       hidden_dims=params.d_hidden_dims,
                                       output_dims=params.d_output_dims),

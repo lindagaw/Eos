@@ -9,7 +9,7 @@ import os
 import numpy as np
 from sklearn.metrics import accuracy_score
 
-def train_progenitor(progenitor, data_loader):
+def train_progenitor(progenitor, data_loader, data_loader_eval):
     """Train progenitor for source domain."""
     ####################
     # 1. setup network #
@@ -57,9 +57,11 @@ def train_progenitor(progenitor, data_loader):
                               len(data_loader),
                               loss.data))
 
-        # eval model on test set
+        # eval model 
         if ((epoch + 1) % params.eval_step_pre == 0):
             eval_progenitor(progenitor, data_loader)
+        if ((epoch + 1) % params.eval_step_pre == 0):
+            eval_progenitor(progenitor, data_loader_eval)
 
         # save model parameters
         if ((epoch + 1) % params.save_step_pre == 0):
