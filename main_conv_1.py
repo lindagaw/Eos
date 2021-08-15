@@ -41,19 +41,25 @@ if __name__ == '__main__':
     tgt_data_loader = get_office_31(dataset = 'office-31-webcam', train=True)
     tgt_data_loader_eval = get_office_31(dataset = 'office-31-webcam', train=False)
 
+
     progenitor = models.vgg16(pretrained=True)
     progenitor.fc = torch.nn.Linear(4096, 31)
     progenitor = progenitor.to(torch.device('cuda:0'))
     #newmodel = torch.nn.Sequential(*(list(model.children())[:-1]))
     print(progenitor)
 
+    try:
+        progenitor = init_model(net=progenitor, restore=params.progenitor_restore)
+    except:
+        progenitor = train_progenitor(progenitor, src_data_loader)
 
-    progenitor = train_progenitor(progenitor, src_data_loader)
     eval_progenitor(progenitor, src_data_loader_eval)
-'''
+
+
     print(">>> load the chopped model with 1 conv, the Descendant <<<")
-    descendant = load_chopped_state_dict(model=Descendant(), pretrained_dict=params.progenitor_restore)
+    descendant = nn.Sequential(*[progenitor.features[i] for i in range(1)])
     print(descendant)
+
 
     print(">>> get the activations after the 1st conv, using Descendant <<<")
 
@@ -67,7 +73,6 @@ if __name__ == '__main__':
     src_conv_1_activations_data_loader_eval = get_conv_1_activations(train=False, dataset='src')
     tgt_conv_1_activations_data_loader = get_conv_1_activations(train=True, dataset='tgt')
     tgt_conv_1_activations_data_loader_eval = get_conv_1_activations(train=False, dataset='tgt')
-
 
 
     print(">>> train the src_encoder, tgt_encoder, src_classifier, tgt_classifier <<<")
@@ -137,4 +142,3 @@ if __name__ == '__main__':
 
     print(">>> enhanced domain adaptation<<<")
     eval_tgt_with_probe(tgt_encoder, critic, src_classifier, tgt_classifier, tgt_conv_1_activations_data_loader_eval)
-'''

@@ -9,6 +9,8 @@ dataset_std = (dataset_std_value, dataset_std_value, dataset_std_value)
 batch_size = 32
 image_size = 64
 
+progenitor_restore = "snapshots//progenitor-final.pt"
+
 # params for source dataset
 src_dataset = "MNIST"
 src_encoder_restore = "snapshots/ADDA-source-encoder-final.pt"
@@ -29,7 +31,7 @@ d_model_restore = "snapshots/ADDA-critic-final.pt"
 
 # params for training network
 num_gpu = 2
-num_epochs_pre = 350
+num_epochs_pre = 20 #280
 log_step_pre = 20
 eval_step_pre = 20
 save_step_pre = 400
@@ -39,7 +41,7 @@ save_step = 100
 manual_seed = None
 
 # params for optimizing models
-d_learning_rate = 1e-5
+d_learning_rate = 1e-4
 c_learning_rate = 1e-6
 beta1 = 0.5
 beta2 = 0.9
