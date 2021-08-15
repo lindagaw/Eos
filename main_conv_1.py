@@ -42,6 +42,7 @@ if __name__ == '__main__':
     tgt_data_loader_eval = get_office_31(dataset = 'office-31-webcam', train=False)
 
     model = model = models.resnet152(pretrained=True)
+    model.fc = nn.Linear(4096, 31)
     #newmodel = torch.nn.Sequential(*(list(model.children())[:-1]))
     print(model)
 
