@@ -42,8 +42,8 @@ if __name__ == '__main__':
     tgt_data_loader_eval = get_office_31(dataset = 'office-31-webcam', train=False)
 
     model = model = models.resnet152(pretrained=True)
-    newmodel = torch.nn.Sequential(*(list(model.children())[:-1]))
-    print(newmodel)
+    #newmodel = torch.nn.Sequential(*(list(model.children())[:-1]))
+    print(model)
 
 '''
     # train the original source classifier, the Progenitor
