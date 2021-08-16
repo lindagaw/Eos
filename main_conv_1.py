@@ -42,8 +42,8 @@ if __name__ == '__main__':
     tgt_data_loader_eval = get_office_31(dataset = 'office-31-webcam', train=False)
 
 
-    progenitor = models.resnet152(pretrained=True)
-    progenitor.fc = torch.nn.Linear(2048, 31)
+    progenitor = models.resnet34(pretrained=True)
+    progenitor.fc = torch.nn.Linear(512, 31)
     progenitor = progenitor.to(torch.device('cuda:0'))
     #newmodel = torch.nn.Sequential(*(list(model.children())[:-1]))
     print(progenitor)
@@ -54,7 +54,7 @@ if __name__ == '__main__':
 
 
     print(">>> load the chopped model with 1 conv, the Descendant <<<")
-    descendant = torch.nn.Sequential(*[progenitor.features[i] for i in range(1)])
+    descendant = torch.nn.Sequential(*(list(progenitor.children())[:1]))
     print(descendant)
 
 
@@ -75,11 +75,11 @@ if __name__ == '__main__':
     print(">>> train the src_encoder, tgt_encoder, src_classifier, tgt_classifier <<<")
 
     # load models
-    src_encoder = torch.nn.Sequential(*(list(progenitor.children())[1:-1]))
+    src_encoder = torch.nn.Sequential(*(list(progenitor.children())[1:20]))
+    src_classifier = torch.nn.Sequential(*(list(progenitor.children())[21:]))
 
-    src_classifier = torch.nn.Linear(512, 31)
-    tgt_classifier = torch.nn.Linear(512, 31)
-    tgt_encoder = torch.nn.Sequential(*(list(progenitor.children())[1:-1]))
+    tgt_classifier = torch.nn.Sequential(*(list(progenitor.children())[1:20]))
+    tgt_encoder = torch.nn.Sequential(*(list(progenitor.children())[21:]))
 
     critic = init_model(Discriminator(input_dims=params.d_input_dims,
                                       hidden_dims=params.d_hidden_dims,
