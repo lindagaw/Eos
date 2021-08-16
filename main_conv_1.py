@@ -94,10 +94,10 @@ if __name__ == '__main__':
     print(src_classifier)
 
 
-    if not (src_encoder.restored and src_classifier.restored and
-            params.src_model_trained):
-        src_encoder, src_classifier = train_src(
-            src_encoder, src_classifier, src_conv_1_activations_data_loader)
+    #if not (src_encoder.restored and src_classifier.restored and
+    #        params.src_model_trained):
+    src_encoder, src_classifier = train_src(
+        src_encoder, src_classifier, src_conv_1_activations_data_loader)
 
     # eval source model
     print("=== Evaluating classifier for source domain ===")
@@ -112,12 +112,12 @@ if __name__ == '__main__':
 
 
     # init weights of target encoder with those of source encoder
-    if not tgt_encoder.restored:
-        tgt_encoder.load_state_dict(src_encoder.state_dict())
+    #if not tgt_encoder.restored:
+    #    tgt_encoder.load_state_dict(src_encoder.state_dict())
 
-    if not (tgt_encoder.restored and critic.restored and
-            params.tgt_model_trained):
-        tgt_encoder = train_tgt(src_encoder, tgt_encoder, critic,
+    #if not (tgt_encoder.restored and critic.restored and
+    #        params.tgt_model_trained):
+    tgt_encoder = train_tgt(src_encoder, tgt_encoder, critic,
                                 src_conv_1_activations_data_loader, tgt_conv_1_activations_data_loader)
 
     tgt_encoder, tgt_classifier = train_tgt_classifier(
