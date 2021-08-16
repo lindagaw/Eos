@@ -43,7 +43,7 @@ if __name__ == '__main__':
 
 
     progenitor = models.resnet34(pretrained=True)
-    #progenitor.fc = torch.nn.Linear(4096, 31)
+    progenitor.fc = torch.nn.Linear(512, 31)
     progenitor = progenitor.to(torch.device('cuda:0'))
     #newmodel = torch.nn.Sequential(*(list(model.children())[:-1]))
     print(progenitor)
@@ -77,8 +77,8 @@ if __name__ == '__main__':
     # load models
     src_encoder = torch.nn.Sequential(*(list(progenitor.children())[1:-1]))
 
-    src_classifier = torch.nn.Linear(4096, 31)
-    tgt_classifier = torch.nn.Linear(4096, 31)
+    src_classifier = torch.nn.Linear(512, 31)
+    tgt_classifier = torch.nn.Linear(512, 31)
     tgt_encoder = torch.nn.Sequential(*(list(progenitor.children())[1:-1]))
 
     critic = init_model(Discriminator(input_dims=params.d_input_dims,
