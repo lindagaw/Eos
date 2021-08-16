@@ -43,7 +43,7 @@ if __name__ == '__main__':
 
 
     progenitor = models.resnet152(pretrained=True)
-    progenitor.fc = torch.nn.Linear(512, 31)
+    #progenitor.fc = torch.nn.Linear(512, 31)
     progenitor = progenitor.to(torch.device('cuda:0'))
     #newmodel = torch.nn.Sequential(*(list(model.children())[:-1]))
     print(progenitor)
