@@ -42,7 +42,7 @@ if __name__ == '__main__':
     tgt_data_loader_eval = get_office_31(dataset = 'office-31-webcam', train=False)
 
 
-    progenitor = models.resnet34(pretrained=True)
+    progenitor = models.resnet152(pretrained=True)
     progenitor.fc = torch.nn.Linear(512, 31)
     progenitor = progenitor.to(torch.device('cuda:0'))
     #newmodel = torch.nn.Sequential(*(list(model.children())[:-1]))
