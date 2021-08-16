@@ -75,11 +75,11 @@ if __name__ == '__main__':
     print(">>> train the src_encoder, tgt_encoder, src_classifier, tgt_classifier <<<")
 
     # load models
-    src_encoder = torch.nn.Sequential(*(list(model.children())[1:-1]))
+    src_encoder = torch.nn.Sequential(*(list(progenitor.children())[1:-1]))
 
     src_classifier = torch.nn.Linear(4096, 31)
     tgt_classifier = torch.nn.Linear(4096, 31)
-    tgt_encoder = torch.nn.Sequential(*(list(model.children())[1:-1]))
+    tgt_encoder = torch.nn.Sequential(*(list(progenitor.children())[1:-1]))
 
     critic = init_model(Discriminator(input_dims=params.d_input_dims,
                                       hidden_dims=params.d_hidden_dims,
