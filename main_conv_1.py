@@ -43,7 +43,7 @@ if __name__ == '__main__':
 
 
     progenitor = models.inception_v3(pretrained=True)
-    #progenitor.fc = torch.nn.Linear(1024, 31)
+    progenitor.fc = torch.nn.Linear(2048, 31)
     progenitor = progenitor.to(torch.device('cuda:0'))
     #newmodel = torch.nn.Sequential(*(list(model.children())[:-1]))
     print(progenitor)
