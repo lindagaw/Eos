@@ -57,6 +57,7 @@ def train_tgt(src_encoder, tgt_encoder, critic, src_data_loader, tgt_data_loader
             feat_concat = torch.cat((feat_src, feat_tgt), 0)
 
             # predict on discriminator
+            print(feat_concat.shape)
             pred_concat = critic(feat_concat.detach())
 
             # prepare real and fake label
