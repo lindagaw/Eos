@@ -42,8 +42,8 @@ if __name__ == '__main__':
     tgt_data_loader_eval = get_office_31(dataset = 'office-31-webcam', train=False)
 
 
-    progenitor = models.googlenet(pretrained=False, aux_logits=False)
-    progenitor.fc = torch.nn.Linear(1024, 31)
+    progenitor = models..densenet201(pretrained='imagenet')
+    #progenitor.fc = torch.nn.Linear(1024, 31)
     progenitor = progenitor.to(torch.device('cuda:0'))
     #newmodel = torch.nn.Sequential(*(list(model.children())[:-1]))
     print(progenitor)
@@ -76,10 +76,10 @@ if __name__ == '__main__':
 
     # load models
     src_encoder = torch.nn.Sequential(*(list(progenitor.children())[2:3]))
-    src_classifier = torch.nn.Sequential(*(list(progenitor.children())[2:]))
+    src_classifier = torch.nn.Sequential(*(list(progenitor.children())[3:]))
 
     tgt_classifier = torch.nn.Sequential(*(list(progenitor.children())[2:3]))
-    tgt_encoder = torch.nn.Sequential(*(list(progenitor.children())[2:]))
+    tgt_encoder = torch.nn.Sequential(*(list(progenitor.children())[3:]))
 
     critic = init_model(Discriminator(input_dims=params.d_input_dims,
                                       hidden_dims=params.d_hidden_dims,
