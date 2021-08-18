@@ -76,10 +76,10 @@ if __name__ == '__main__':
 
     # load models
     src_encoder = torch.nn.Sequential(*(list(progenitor.children())[2:10]))
-    src_classifier = torch.nn.Sequential(*(list(progenitor.children())[10:]))
+    src_classifier = torch.nn.Sequential(*(list(progenitor.children())[11:]))
 
     tgt_classifier = torch.nn.Sequential(*(list(progenitor.children())[2:10]))
-    tgt_encoder = torch.nn.Sequential(*(list(progenitor.children())[10:]))
+    tgt_encoder = torch.nn.Sequential(*(list(progenitor.children())[11:]))
 
     critic = init_model(Discriminator(input_dims=params.d_input_dims,
                                       hidden_dims=params.d_hidden_dims,
