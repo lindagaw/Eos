@@ -73,7 +73,7 @@ def train_tgt(src_encoder, tgt_encoder, critic, src_data_loader, tgt_data_loader
             pred_cls = torch.squeeze(pred_concat.max(1)[1])
             acc = (pred_cls == label_concat).float().mean()
 
-            
+
 
             ############################
             # 2.2 train target encoder #
@@ -163,7 +163,7 @@ def train_tgt_classifier(encoder, classifier, data_loader):
             optimizer.zero_grad()
 
             # compute loss for critic
-            preds = classifier(encoder(images))
+            preds = classifier(torch.squeeze(encoder(images)))
             loss = criterion(preds, labels)
 
             # optimize source classifier

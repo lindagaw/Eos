@@ -31,8 +31,8 @@ def get_distribution(src_encoder, tgt_encoder, src_classifier, tgt_classifier, c
             images = make_variable(images, volatile=True)
             labels = make_variable(labels).squeeze_()
             torch.no_grad()
-            src_preds = src_classifier(src_encoder(images)).detach().cpu().numpy()
-            tgt_preds = tgt_classifier(tgt_encoder(images)).detach().cpu().numpy()
+            src_preds = src_classifier(torch.squeeze(src_encoder(images))).detach().cpu().numpy()
+            tgt_preds = tgt_classifier(torch.squeeze(tgt_encoder(images))).detach().cpu().numpy()
             critic_at_src = critic(src_encoder(images)).detach().cpu().numpy()
             critic_at_tgt = critic(tgt_encoder(images)).detach().cpu().numpy()
             for image, label, src_pred, tgt_pred, src_critic, tgt_critic \
@@ -103,8 +103,8 @@ def eval_ADDA(src_encoder, tgt_encoder, src_classifier, tgt_classifier, critic, 
         labels = make_variable(labels).squeeze_()
         torch.no_grad()
 
-        src_preds = src_classifier(src_encoder(images)).detach().cpu().numpy()
-        tgt_preds = tgt_classifier(tgt_encoder(images)).detach().cpu().numpy()
+        src_preds = src_classifier(torch.squeeze(src_encoder(images))).detach().cpu().numpy()
+        tgt_preds = tgt_classifier(torch.squeeze(tgt_encoder(images))).detach().cpu().numpy()
         critic_at_src = critic(src_encoder(images)).detach().cpu().numpy()
         critic_at_tgt = critic(tgt_encoder(images)).detach().cpu().numpy()
 
@@ -156,9 +156,9 @@ def eval_tgt_with_probe(encoder, critic, src_classifier, tgt_classifier, data_lo
 
         for image, label, probed in zip(images, labels, probeds):
             if torch.argmax(probed) == 1:
-                pred = torch.argmax(src_classifier(encoder(torch.unsqueeze(image, 0)))).detach().cpu().numpy()
+                pred = torch.argmax(src_classifier(torch.squeeze(encoder(torch.unsqueeze(image, 0))))).detach().cpu().numpy()
             else:
-                pred = torch.argmax(tgt_classifier(encoder(torch.unsqueeze(image, 0)))).detach().cpu().numpy()
+                pred = torch.argmax(tgt_classifier(torch.squeeze(encoder(torch.unsqueeze(image, 0))))).detach().cpu().numpy()
 
         ys_pred.append(np.squeeze(pred))
         ys_true.append(np.squeeze(label.detach().cpu().numpy()))
