@@ -76,7 +76,7 @@ if __name__ == '__main__':
 
     # load models
     src_encoder = torch.nn.Sequential(*(list(progenitor.children())[2:20]))
-    src_classifier = torch.nn.Sequential(*(list(progenitor.children())[21:]))
+    src_classifier = torch.nn.Sequential(*(list(progenitor.children())[21:len(list(progenitor.children()))]))
 
     tgt_classifier = torch.nn.Sequential(*(list(progenitor.children())[2:20]))
     tgt_encoder = torch.nn.Sequential(*(list(progenitor.children())[20:]))
@@ -89,9 +89,9 @@ if __name__ == '__main__':
     # train source model
     print("=== Training classifier for source domain ===")
     print(">>> Source Encoder <<<")
-    #print(src_encoder)
+    print(src_encoder)
     print(">>> Source Classifier <<<")
-    #print(src_classifier)
+    print(src_classifier)
 
 
     #if not (src_encoder.restored and src_classifier.restored and
