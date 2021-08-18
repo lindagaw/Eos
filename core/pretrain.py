@@ -39,6 +39,9 @@ def train_src(encoder, classifier, data_loader):
 
             # compute loss for critic
             encoded = encoder(images)
+
+            print(encoded.shape)
+
             preds = classifier(encoded)
             loss = criterion(preds, labels)
 
