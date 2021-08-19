@@ -227,7 +227,7 @@ def eval_tgt(encoder, classifier, data_loader):
         images = make_variable(images, volatile=True)
         labels = make_variable(labels).squeeze_()
 
-        preds = classifier(encoder(images))
+        preds = classifier(torch.squeeze(encoder(images)))
         loss += criterion(preds, labels).data
 
         for pred, label in zip(preds, labels):
