@@ -33,8 +33,8 @@ def get_distribution(src_encoder, tgt_encoder, src_classifier, tgt_classifier, c
             torch.no_grad()
             src_preds = src_classifier(torch.squeeze(src_encoder(images))).detach().cpu().numpy()
             tgt_preds = tgt_classifier(torch.squeeze(tgt_encoder(images))).detach().cpu().numpy()
-            critic_at_src = critic(src_encoder(images)).detach().cpu().numpy()
-            critic_at_tgt = critic(tgt_encoder(images)).detach().cpu().numpy()
+            critic_at_src = critic(torch.squeeze(src_encoder(images))).detach().cpu().numpy()
+            critic_at_tgt = critic(torch.squeeze(tgt_encoder(images))).detach().cpu().numpy()
             for image, label, src_pred, tgt_pred, src_critic, tgt_critic \
                             in zip(images, labels, src_preds, tgt_preds, critic_at_src, critic_at_tgt):
                 vectors.append(np.linalg.norm(src_critic.tolist() + tgt_critic.tolist()))
@@ -105,8 +105,8 @@ def eval_ADDA(src_encoder, tgt_encoder, src_classifier, tgt_classifier, critic, 
 
         src_preds = src_classifier(torch.squeeze(src_encoder(images))).detach().cpu().numpy()
         tgt_preds = tgt_classifier(torch.squeeze(tgt_encoder(images))).detach().cpu().numpy()
-        critic_at_src = critic(src_encoder(images)).detach().cpu().numpy()
-        critic_at_tgt = critic(tgt_encoder(images)).detach().cpu().numpy()
+        critic_at_src = critic(torch.squeeze(src_encoder(images))).detach().cpu().numpy()
+        critic_at_tgt = critic(torch.squeeze(tgt_encoder(images))).detach().cpu().numpy()
 
         for image, label, src_pred, tgt_pred, src_critic, tgt_critic \
                         in zip(images, labels, src_preds, tgt_preds, critic_at_src, critic_at_tgt):
@@ -190,7 +190,7 @@ def eval_tgt_with_probe(encoder, critic, src_classifier, tgt_classifier, data_lo
         images = make_variable(images, volatile=True)
         labels = make_variable(labels).squeeze_()
 
-        probeds = critic(encoder(images))
+        probeds = critic(torch.squeeze(encoder(images)))
 
         for image, label, probed in zip(images, labels, probeds):
             if torch.argmax(probed) == 1:
