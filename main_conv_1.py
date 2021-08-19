@@ -107,9 +107,9 @@ if __name__ == '__main__':
     # train target encoder by GAN
     print("=== Training encoder for target domain ===")
     print(">>> Target Encoder <<<")
-    #print(tgt_encoder)
+    print(tgt_encoder)
     print(">>> Critic <<<")
-    #print(critic)
+    print(critic)
 
 
     # init weights of target encoder with those of source encoder
