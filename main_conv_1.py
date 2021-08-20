@@ -42,7 +42,7 @@ if __name__ == '__main__':
     tgt_data_loader_eval = get_office_31(dataset = 'office-31-webcam', train=False)
 
 
-    progenitor = models.googlenet(pretrained=False, aux_logits=False)
+    progenitor = models.googlenet(pretrained=True, aux_logits=False)
     progenitor.fc = torch.nn.Linear(1024, 31)
     progenitor = progenitor.to(torch.device('cuda:0'))
     #newmodel = torch.nn.Sequential(*(list(model.children())[:-1]))
@@ -54,7 +54,7 @@ if __name__ == '__main__':
 
 
     print(">>> load the chopped model with 1 conv, the Descendant <<<")
-    descendant = torch.nn.Sequential(*(list(progenitor.children())[:2]))
+    descendant = torch.nn.Sequential(*(list(progenitor.children())[:10]))
     print(descendant)
 
 
@@ -76,10 +76,10 @@ if __name__ == '__main__':
 
     # load models
     # load models
-    src_encoder = torch.nn.Sequential(*(list(progenitor.children())[2:-1]))
+    src_encoder = torch.nn.Sequential(*(list(progenitor.children())[10:-1]))
     src_classifier = torch.nn.Linear(1024, 31).to(torch.device('cuda:0'))
 
-    tgt_encoder = torch.nn.Sequential(*(list(progenitor.children())[2:-1]))
+    tgt_encoder = torch.nn.Sequential(*(list(progenitor.children())[10:-1]))
     tgt_classifier = torch.nn.Linear(1024, 31).to(torch.device('cuda:0'))
 
     critic = init_model(Discriminator(input_dims=params.d_input_dims,
