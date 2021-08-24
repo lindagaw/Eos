@@ -19,7 +19,7 @@ from utils import get_data_loader, init_model, init_random_seed, load_chopped_st
 
 from datasets import get_conv_1_activations, get_conv_2_activations
 from datasets import get_office_home, get_office_31
-from datasets import get_cifar_10
+from datasets import get_cifar_10, get_stl_10
 
 import torch
 
@@ -40,8 +40,8 @@ if __name__ == '__main__':
 
     src_data_loader = get_cifar_10(train=True)
     src_data_loader_eval = get_cifar_10(train=False)
-    tgt_data_loader = get_cifar_10(train=True)
-    tgt_data_loader_eval = get_cifar_10(train=False)
+    tgt_data_loader = get_stl_10(train=True)
+    tgt_data_loader_eval = get_stl_10(train=False)
 
 
     progenitor = models.resnet50(pretrained=True)
