@@ -147,7 +147,7 @@ def save_images(images, labels):
             if exc.errno == errno.EEXIST:
                 pass
         filename = directory + str(i)
-        print(filename)
+        #print(filename)
         save_image(image, filename)
         i = i+1
 
@@ -162,7 +162,7 @@ class STL_10(data.Dataset):
             os.makedirs(self.root)
         except:
             pass
-            
+
         self.training = dataset + ".pkl"
         self.testing = dataset + "_eval.pkl"
         self.train = train
@@ -194,6 +194,8 @@ class STL_10(data.Dataset):
             from sklearn.model_selection import train_test_split
 
             xs_train, xs_test, ys_train, ys_test = train_test_split(images, labels, test_size=0.33, random_state=42)
+
+            print(ys_train.shape)
 
             #xs_train = torch.from_numpy(np.load(self.root + dataset + '//xs_train.npy'))
             #xs_test = torch.from_numpy(np.load(self.root + dataset + '//xs_test.npy'))
