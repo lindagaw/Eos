@@ -193,9 +193,28 @@ class STL_10(data.Dataset):
 
             from sklearn.model_selection import train_test_split
 
-            xs_train, xs_test, ys_train, ys_test = train_test_split(images, labels, test_size=0.33, random_state=42)
+            xs_train, xs_test, ys_train_raw, ys_test_raw = train_test_split(images, labels, test_size=0.33, random_state=42)
 
-            print(ys_train.shape)
+            ys_train = []
+            ys_test = []
+            for y in ys_train_raw:
+                if y == 2:
+                    ys_train.append(3)
+                elif y == 3:
+                    ys_train.append(2)
+                else:
+                    ys_train.append(y)
+
+            for y in ys_test_raw:
+                if y == 2:
+                    ys_test.append(3)
+                elif y == 3:
+                    ys_test.append(2)
+                else:
+                    ys_test.append(y)
+
+            ys_train = np.asarray(ys_train)
+            ys_test = np.asarray(ys_test)
 
             #xs_train = torch.from_numpy(np.load(self.root + dataset + '//xs_train.npy'))
             #xs_test = torch.from_numpy(np.load(self.root + dataset + '//xs_test.npy'))
