@@ -43,12 +43,16 @@ if __name__ == '__main__':
     tgt_data_loader = get_stl_10(train=True, dataset='STL_10')
     tgt_data_loader_eval = get_stl_10(train=False, dataset='STL_10')
 
+    progenitor = models.resnet50(pretrained=True)
+    progenitor.fc = torch.nn.Linear(2048, 31)
+    progenitor = progenitor.to(torch.device('cuda:0'))
+
     try:
-        progenitor = init_model(models.resnet50(), restore='snapshots//progenitor-final.pt')
-    except Except as e:
+        progenitor = init_model(progenitor, restore='snapshots//progenitor-final.pt')
+    except Exception as e:
         print(e)
         progenitor = models.resnet50(pretrained=True)
-        progenitor.fc = torch.nn.Linear(2048, 31)
+        progenitor.fc = torch.nn.Linear(2048, 10)
         progenitor = progenitor.to(torch.device('cuda:0'))
         #newmodel = torch.nn.Sequential(*(list(model.children())[:-1]))
         print(progenitor)
