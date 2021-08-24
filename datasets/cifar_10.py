@@ -24,7 +24,7 @@ def get_cifar_10(train):
                                    download=True)
 
     cifar_10_data_loader = torch.utils.data.DataLoader(
-        dataset=svhn_dataset,
+        dataset=cifar_10_dataset,
         batch_size=params.batch_size,
         shuffle=True)
 
