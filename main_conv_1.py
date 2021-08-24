@@ -62,7 +62,7 @@ if __name__ == '__main__':
 
 
     print(">>> load the chopped model with 1 conv, the Descendant <<<")
-    descendant = torch.nn.Sequential(*(list(progenitor.children())[:10]))
+    descendant = torch.nn.Sequential(*(list(progenitor.children())[:3]))
     print(descendant)
 
 
@@ -84,10 +84,10 @@ if __name__ == '__main__':
 
     # load models
     # load models
-    src_encoder = torch.nn.Sequential(*(list(progenitor.children())[10:-1]))
+    src_encoder = torch.nn.Sequential(*(list(progenitor.children())[3:-1]))
     src_classifier = torch.nn.Linear(2048, 10).to(torch.device('cuda:0'))
 
-    tgt_encoder = torch.nn.Sequential(*(list(progenitor.children())[10:-1]))
+    tgt_encoder = torch.nn.Sequential(*(list(progenitor.children())[3:-1]))
     tgt_classifier = torch.nn.Linear(2048, 10).to(torch.device('cuda:0'))
 
     critic = init_model(Discriminator(input_dims=params.d_input_dims,
