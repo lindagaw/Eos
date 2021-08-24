@@ -44,7 +44,7 @@ if __name__ == '__main__':
     tgt_data_loader_eval = get_cifar_10(train=False)
 
 
-    progenitor = models.resnet50(pretrained=True, aux_logits=False)
+    progenitor = models.resnet50(pretrained=True)
     progenitor.fc = torch.nn.Linear(2048, 31)
     progenitor = progenitor.to(torch.device('cuda:0'))
     #newmodel = torch.nn.Sequential(*(list(model.children())[:-1]))
