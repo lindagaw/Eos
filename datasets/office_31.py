@@ -116,7 +116,7 @@ def get_office_31(train, dataset):
                                           mean=params.dataset_mean,
                                           std=params.dataset_std)])
     
-    pre_process =  transforms.Compose([transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]])
+    pre_process =  transforms.Compose([transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]]))
 
     office_31_dataset = Office_31(root=params.data_root,
                         train=train,
