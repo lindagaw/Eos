@@ -194,8 +194,8 @@ class STL_10(data.Dataset):
             #ys_train = torch.from_numpy(np.load(self.root + dataset + '//ys_train.npy'))
             #ys_test = torch.from_numpy(np.load(self.root + dataset + '//ys_test.npy'))
 
-            torch.save(TensorDataset(xs_train, ys_train), self.root + self.training)
-            torch.save(TensorDataset(xs_test, ys_test), self.root + self.testing)
+            torch.save(TensorDataset(torch.Tensor(xs_train), torch.Tensor(ys_train)), self.root + self.training)
+            torch.save(TensorDataset(torch.Tensor(xs_test), torch.Tensor(ys_test)), self.root + self.testing)
 
             data_set_train = torch.load(self.root + self.training)
             data_set_test = torch.load(self.root + self.testing)
