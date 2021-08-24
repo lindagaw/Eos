@@ -215,18 +215,14 @@ class STL_10(data.Dataset):
                 elif y == 1:
                     ys_test.append(2)
                 if y == 6:
-                    ys_train.append(7)
+                    ys_test.append(7)
                 elif y == 7:
-                    ys_train.append(6)
+                    ys_test.append(6)
                 else:
                     ys_test.append(y)
 
             ys_train = np.asarray(ys_train)
             ys_test = np.asarray(ys_test)
-
-            print('----------------')
-            print(xs_train.shape)
-            print(ys_train.shape)
 
             #xs_train = torch.from_numpy(np.load(self.root + dataset + '//xs_train.npy'))
             #xs_test = torch.from_numpy(np.load(self.root + dataset + '//xs_test.npy'))
