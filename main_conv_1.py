@@ -47,16 +47,16 @@ if __name__ == '__main__':
     progenitor.fc = torch.nn.Linear(2048, 10)
     progenitor = progenitor.to(torch.device('cuda:0'))
 
-    try:
-        progenitor = init_model(progenitor, restore='snapshots//progenitor-final.pt')
-    except Exception as e:
-        print(e)
-        progenitor = models.resnet50(pretrained=True)
-        progenitor.fc = torch.nn.Linear(2048, 10)
-        progenitor = progenitor.to(torch.device('cuda:0'))
+    #try:
+    #    progenitor = init_model(progenitor, restore='snapshots//progenitor-final.pt')
+    #except Exception as e:
+    #    print(e)
+        #progenitor = models.resnet50(pretrained=True)
+        #progenitor.fc = torch.nn.Linear(2048, 10)
+        #progenitor = progenitor.to(torch.device('cuda:0'))
         #newmodel = torch.nn.Sequential(*(list(model.children())[:-1]))
-        print(progenitor)
-        progenitor = train_progenitor(progenitor, src_data_loader, src_data_loader_eval)
+    print(progenitor)
+    progenitor = train_progenitor(progenitor, src_data_loader, src_data_loader_eval)
 
     eval_progenitor(progenitor, src_data_loader_eval)
 
