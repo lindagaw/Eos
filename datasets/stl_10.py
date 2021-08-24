@@ -1,6 +1,7 @@
+from __future__ import print_function
+
 import pickle
 import torch
-import numpy as np
 import torch.utils.data as data
 from torch.utils.data import TensorDataset, DataLoader
 import params
@@ -8,8 +9,6 @@ import params
 import os
 import gzip
 from torchvision import datasets, transforms
-
-from __future__ import print_function
 
 import sys
 import os, sys, tarfile, errno
