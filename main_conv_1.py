@@ -19,6 +19,7 @@ from utils import get_data_loader, init_model, init_random_seed, load_chopped_st
 
 from datasets import get_conv_1_activations, get_conv_2_activations
 from datasets import get_office_home, get_office_31
+from datasets import get_cifar_10
 
 import torch
 
@@ -31,15 +32,16 @@ if __name__ == '__main__':
     init_random_seed(params.manual_seed)
 
     # load dataset
-    #src_data_loader = get_data_loader(params.src_dataset)
-    #src_data_loader_eval = get_data_loader(params.src_dataset, train=False)
-    #tgt_data_loader = get_data_loader(params.tgt_dataset)
-    #tgt_data_loader_eval = get_data_loader(params.tgt_dataset, train=False)
 
-    src_data_loader = get_office_31(dataset = 'office-31-amazon', train=True)
-    src_data_loader_eval = get_office_31(dataset = 'office-31-amazon', train=False)
-    tgt_data_loader = get_office_31(dataset = 'office-31-webcam', train=True)
-    tgt_data_loader_eval = get_office_31(dataset = 'office-31-webcam', train=False)
+    #src_data_loader = get_office_31(dataset = 'office-31-amazon', train=True)
+    #src_data_loader_eval = get_office_31(dataset = 'office-31-amazon', train=False)
+    #tgt_data_loader = get_office_31(dataset = 'office-31-webcam', train=True)
+    #tgt_data_loader_eval = get_office_31(dataset = 'office-31-webcam', train=False)
+
+    src_data_loader = get_cifar_10(train=True)
+    src_data_loader_eval = get_cifar_10(train=False)
+    tgt_data_loader = get_cifar_10(train=True)
+    tgt_data_loader_eval = get_cifar_10(train=False)
 
 
     progenitor = models.googlenet(pretrained=True, aux_logits=False)

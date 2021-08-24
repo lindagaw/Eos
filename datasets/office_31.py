@@ -117,7 +117,7 @@ def get_office_31(train, dataset):
                                           std=params.dataset_std)])
     
     pre_process = transforms.Compose([
-        transforms.Scale((256, 256)),
+        transforms.Resize((256, 256)),
         transforms.RandomCrop((224, 224)),
         transforms.RandomHorizontalFlip(),
         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
