@@ -157,6 +157,12 @@ class STL_10(data.Dataset):
         """Init USPS dataset."""
 
         self.root = 'data//stl-10//'
+
+        try:
+            os.makedirs(self.root)
+        except:
+            pass
+            
         self.training = dataset + ".pkl"
         self.testing = dataset + "_eval.pkl"
         self.train = train
