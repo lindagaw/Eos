@@ -202,10 +202,6 @@ class STL_10(data.Dataset):
                     ys_train.append(1)
                 elif y == 1:
                     ys_train.append(2)
-                if y == 6:
-                    ys_train.append(7)
-                elif y == 7:
-                    ys_train.append(6)
                 else:
                     ys_train.append(y)
 
@@ -214,10 +210,6 @@ class STL_10(data.Dataset):
                     ys_test.append(1)
                 elif y == 1:
                     ys_test.append(2)
-                if y == 6:
-                    ys_test.append(7)
-                elif y == 7:
-                    ys_test.append(6)
                 else:
                     ys_test.append(y)
 
