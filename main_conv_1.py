@@ -44,8 +44,9 @@ if __name__ == '__main__':
     tgt_data_loader_eval = get_stl_10(train=False, dataset='STL_10')
 
     try:
-        progenitor = init_model(models.resnet50(pretrained=True), restore='snapshots//progenitor-final.pt')
-    except:
+        progenitor = init_model(models.resnet50(), restore='snapshots//progenitor-final.pt')
+    except Except as e:
+        print(e)
         progenitor = models.resnet50(pretrained=True)
         progenitor.fc = torch.nn.Linear(2048, 31)
         progenitor = progenitor.to(torch.device('cuda:0'))
