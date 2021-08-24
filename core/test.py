@@ -28,7 +28,7 @@ def get_distribution(src_encoder, tgt_encoder, src_classifier, tgt_classifier, c
         print("Start calculating the mahalanobis distances' mean and standard deviation ... ")
         vectors = []
         for (images, labels) in data_loader:
-            images = make_variable(images, volatile=True)
+            images = make_variable(images, volatile=True).squeeze_()
             labels = make_variable(labels).squeeze_()
             torch.no_grad()
             src_preds = src_classifier(torch.squeeze(src_encoder(images))).detach().cpu().numpy()

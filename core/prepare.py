@@ -32,7 +32,7 @@ def train_progenitor(progenitor, data_loader, data_loader_eval):
     for epoch in range(params.num_epochs_pre):
         for step, (images, labels) in enumerate(data_loader):
             # make images and labels variable
-            images = make_variable(images)
+            images = make_variable(images.squeeze_())
             labels = make_variable(labels.squeeze_())
 
             # zero gradients for optimizer
@@ -57,7 +57,7 @@ def train_progenitor(progenitor, data_loader, data_loader_eval):
                               len(data_loader),
                               loss.data))
 
-        # eval model 
+        # eval model
         if ((epoch + 1) % params.eval_step_pre == 0):
             eval_progenitor(progenitor, data_loader)
         if ((epoch + 1) % params.eval_step_pre == 0):

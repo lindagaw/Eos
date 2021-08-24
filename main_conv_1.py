@@ -43,14 +43,15 @@ if __name__ == '__main__':
     tgt_data_loader = get_stl_10(train=True, dataset='STL_10')
     tgt_data_loader_eval = get_stl_10(train=False, dataset='STL_10')
 
-
-    progenitor = models.resnet50(pretrained=True)
-    progenitor.fc = torch.nn.Linear(2048, 31)
-    progenitor = progenitor.to(torch.device('cuda:0'))
-    #newmodel = torch.nn.Sequential(*(list(model.children())[:-1]))
-    print(progenitor)
-
-    progenitor = train_progenitor(progenitor, src_data_loader, src_data_loader_eval)
+    try:
+        progenitor = init_model(models.resnet50(pretrained=True), restore='snapshots//progenitor-final.pt')
+    except:
+        progenitor = models.resnet50(pretrained=True)
+        progenitor.fc = torch.nn.Linear(2048, 31)
+        progenitor = progenitor.to(torch.device('cuda:0'))
+        #newmodel = torch.nn.Sequential(*(list(model.children())[:-1]))
+        print(progenitor)
+        progenitor = train_progenitor(progenitor, src_data_loader, src_data_loader_eval)
 
     eval_progenitor(progenitor, src_data_loader_eval)
 
