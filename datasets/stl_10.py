@@ -23,9 +23,14 @@ def get_stl_10(split):
                                    transform=pre_process,
                                    download=True)
 
-    stl_10_dataset.targets[dataset.targets == 2] = 100
-    stl_10_dataset.targets[dataset.targets == 1] = 2
-    stl_10_dataset.targets[dataset.targets == 100] = 1
+    if split:
+        stl_10_dataset.train_labels[dataset.train_labels == 2] = 100
+        stl_10_dataset.train_labels[dataset.train_labels == 1] = 2
+        stl_10_dataset.train_labels[dataset.train_labels == 100] = 1
+    else:
+        stl_10_dataset.test_labels[dataset.test_labels == 2] = 100
+        stl_10_dataset.test_labels[dataset.test_labels == 1] = 2
+        stl_10_dataset.test_labels[dataset.test_labels == 100] = 1
 
     stl_10_data_loader = torch.utils.data.DataLoader(
         dataset=stl_10_dataset,
