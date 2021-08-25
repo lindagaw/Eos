@@ -175,7 +175,7 @@ class STL_10(data.Dataset):
         # download dataset.
         if download:
 
-                    # download data if needed
+            # download data if needed
             download_and_extract()
 
             # test to check if the image is read correctly
