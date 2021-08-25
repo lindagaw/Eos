@@ -157,7 +157,12 @@ class STL_10(data.Dataset):
 
     def __init__(self, root, train=True, transform=None, download=False, dataset='undefined'):
         """Init USPS dataset."""
-        self.root = 'data//office-31//'
+        self.root = 'data//stl-10//'
+        try:
+            os.makedirs(self.root)
+        except:
+            print('root already exists. skipping ...')
+
         self.training = dataset + ".pkl"
         self.testing = dataset + "_eval.pkl"
         self.train = train
