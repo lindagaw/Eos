@@ -23,11 +23,6 @@ def get_stl_10(split):
                                    transform=pre_process,
                                    download=True)
 
-    stl_10_dataset.targets = torch.tensor(stl_10_dataset.targets)                               
-    stl_10_dataset.targets[dataset.targets == 2] = 100
-    stl_10_dataset.targets[dataset.targets == 1] = 2
-    stl_10_dataset.targets[dataset.targets == 100] = 1
-
     stl_10_data_loader = torch.utils.data.DataLoader(
         dataset=stl_10_dataset,
         batch_size=params.batch_size,
