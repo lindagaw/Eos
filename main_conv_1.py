@@ -40,8 +40,8 @@ if __name__ == '__main__':
 
     src_data_loader = get_cifar_10(train=True)
     src_data_loader_eval = get_cifar_10(train=False)
-    tgt_data_loader = get_stl_10(train=True)
-    tgt_data_loader_eval = get_stl_10(train=False)
+    tgt_data_loader = get_stl_10(train=True, dataset='STL_10')
+    tgt_data_loader_eval = get_stl_10(train=False, dataset='STL_10')
 
     progenitor = models.resnet50(pretrained=True)
     progenitor.fc = torch.nn.Linear(2048, 10)
