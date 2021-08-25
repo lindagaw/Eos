@@ -187,10 +187,10 @@ class STL_10(data.Dataset):
             np.save(self.root + dataset + '//ys_train.npy', ys_train)
             np.save(self.root + dataset + '//ys_train.npy', ys_train)
 
-            xs_train = torch.from_numpy(np.load(self.root + dataset + '//xs_train.npy'))
-            xs_test = torch.from_numpy(np.load(self.root + dataset + '//xs_test.npy'))
-            ys_train = torch.from_numpy(np.load(self.root + dataset + '//ys_train.npy'))
-            ys_test = torch.from_numpy(np.load(self.root + dataset + '//ys_test.npy'))
+            xs_train = torch.from_numpy(np.load(self.root + '//xs_train.npy'))
+            xs_test = torch.from_numpy(np.load(self.root + '//xs_test.npy'))
+            ys_train = torch.from_numpy(np.load(self.root + '//ys_train.npy'))
+            ys_test = torch.from_numpy(np.load(self.root + '//ys_test.npy'))
 
             torch.save(TensorDataset(xs_train, ys_train), self.root + self.training)
             torch.save(TensorDataset(xs_test, ys_test), self.root + self.testing)
