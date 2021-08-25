@@ -22,10 +22,10 @@ def get_cifar_10(train):
                                    train=train,
                                    transform=pre_process,
                                    download=True)
-                                                                
-    stl_10_dataset.targets[dataset.targets == 2] = 100
-    stl_10_dataset.targets[dataset.targets == 1] = 2
-    stl_10_dataset.targets[dataset.targets == 100] = 1
+
+    cifar_10_dataset.targets[dataset.targets == 2] = 100
+    cifar_10_dataset.targets[dataset.targets == 1] = 2
+    cifar_10_dataset.targets[dataset.targets == 100] = 1
 
     cifar_10_data_loader = torch.utils.data.DataLoader(
         dataset=cifar_10_dataset,
