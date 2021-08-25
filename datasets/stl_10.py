@@ -182,15 +182,15 @@ class STL_10(data.Dataset):
 
             xs_train, xs_test, ys_train, ys_test = train_test_split(images, labels, test_size=0.33, random_state=42)
 
-            np.save(self.root + dataset + '//xs_train.npy', xs_train)
-            np.save(self.root + dataset + '//xs_test.npy', xs_test)
-            np.save(self.root + dataset + '//ys_train.npy', ys_train)
-            np.save(self.root + dataset + '//ys_train.npy', ys_train)
+            np.save(self.root + 'xs_train.npy', xs_train)
+            np.save(self.root + 'xs_test.npy', xs_test)
+            np.save(self.root + 'ys_train.npy', ys_train)
+            np.save(self.root + 'ys_train.npy', ys_train)
 
-            xs_train = torch.from_numpy(np.load(self.root + '//xs_train.npy'))
-            xs_test = torch.from_numpy(np.load(self.root + '//xs_test.npy'))
-            ys_train = torch.from_numpy(np.load(self.root + '//ys_train.npy'))
-            ys_test = torch.from_numpy(np.load(self.root + '//ys_test.npy'))
+            xs_train = torch.from_numpy(np.load(self.root + 'xs_train.npy'))
+            xs_test = torch.from_numpy(np.load(self.root + 'xs_test.npy'))
+            ys_train = torch.from_numpy(np.load(self.root + 'ys_train.npy'))
+            ys_test = torch.from_numpy(np.load(self.root + 'ys_test.npy'))
 
             torch.save(TensorDataset(xs_train, ys_train), self.root + self.training)
             torch.save(TensorDataset(xs_test, ys_test), self.root + self.testing)
