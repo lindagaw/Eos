@@ -41,7 +41,7 @@ if __name__ == '__main__':
     src_data_loader = get_cifar_10(train=True)
     src_data_loader_eval = get_cifar_10(train=False)
     tgt_data_loader = get_stl_10(split='train')
-    tgt_data_loader_eval = get_stl_10(train='test')
+    tgt_data_loader_eval = get_stl_10(split='test')
 
     progenitor = models.resnet50(pretrained=True)
     progenitor.fc = torch.nn.Linear(2048, 10)
