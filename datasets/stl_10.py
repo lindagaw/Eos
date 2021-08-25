@@ -193,7 +193,7 @@ class STL_10(data.Dataset):
 
             from sklearn.model_selection import train_test_split
 
-            xs_train, xs_test, ys_train_raw, ys_test_raw = train_test_split(images, labels, test_size=0.33, random_state=42)
+            xs_train, xs_test, ys_train_raw, ys_test_raw = train_test_split(np.asarray(images), np.asarray(labels), test_size=0.33, random_state=42)
 
             ys_train = []
             ys_test = []
