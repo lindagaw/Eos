@@ -7,7 +7,7 @@ from torchvision import datasets, transforms
 import params
 
 
-def get_stl_10(train):
+def get_stl_10(split):
     """Get SVHN dataset loader."""
     # image pre-processing
     pre_process = transforms.Compose([transforms.ToTensor(),
@@ -19,7 +19,7 @@ def get_stl_10(train):
                                         transforms.Normalize((0.5,), (0.5,))])
     # dataset and data loader
     stl_10_dataset = datasets.STL10(root=params.data_root,
-                                   #train=train,
+                                   split=split,
                                    transform=pre_process,
                                    download=True)
 
