@@ -13,7 +13,7 @@ from torchvision import datasets, transforms
 
 import sys
 import os, sys, tarfile, errno
-import numpy as np
+from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 
 if sys.version_info >= (3, 0, 0):
