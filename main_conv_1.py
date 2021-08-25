@@ -41,7 +41,7 @@ if __name__ == '__main__':
     src_data_loader = get_cifar_10(train=True)
     src_data_loader_eval = get_cifar_10(train=False)
     tgt_data_loader = get_stl_10(split='train')
-    tgt_data_loader_eval = get_stl_10(split='test')
+    tgt_data_loader_eval = get_stl_10(train='test')
 
     progenitor = models.resnet50(pretrained=True)
     progenitor.fc = torch.nn.Linear(2048, 10)
@@ -68,10 +68,10 @@ if __name__ == '__main__':
 
 
     print(">>> construct dataloader after activations from 1st conv <<<")
-    src_conv_1_activations_data_loader = get_conv_1_activations(train=True, dataset='src')
-    src_conv_1_activations_data_loader_eval = get_conv_1_activations(train=False, dataset='src')
-    tgt_conv_1_activations_data_loader = get_conv_1_activations(train=True, dataset='tgt')
-    tgt_conv_1_activations_data_loader_eval = get_conv_1_activations(train=False, dataset='tgt')
+    #src_conv_1_activations_data_loader = get_conv_1_activations(train=True, dataset='src')
+    #src_conv_1_activations_data_loader_eval = get_conv_1_activations(train=False, dataset='src')
+    #tgt_conv_1_activations_data_loader = get_conv_1_activations(train=True, dataset='tgt')
+    #tgt_conv_1_activations_data_loader_eval = get_conv_1_activations(train=False, dataset='tgt')
 
 
     print(">>> train the src_encoder, tgt_encoder, src_classifier, tgt_classifier <<<")
