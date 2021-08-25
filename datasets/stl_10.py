@@ -185,7 +185,7 @@ class STL_10(data.Dataset):
             np.save(self.root + 'xs_train.npy', xs_train)
             np.save(self.root + 'xs_test.npy', xs_test)
             np.save(self.root + 'ys_train.npy', ys_train)
-            np.save(self.root + 'ys_train.npy', ys_train)
+            np.save(self.root + 'ys_test.npy', ys_test)
 
             xs_train = torch.from_numpy(np.load(self.root + 'xs_train.npy'))
             xs_test = torch.from_numpy(np.load(self.root + 'xs_test.npy'))
