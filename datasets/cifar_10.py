@@ -19,7 +19,7 @@ def get_cifar_10(train):
                                         transforms.Normalize((0.5,), (0.5,))])
     # dataset and data loader
     cifar_10_dataset = datasets.CIFAR10(root=params.data_root,
-                                   #train=train,
+                                   train=train,
                                    transform=pre_process,
                                    download=True)
 

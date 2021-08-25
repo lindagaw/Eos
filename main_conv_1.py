@@ -56,15 +56,16 @@ if __name__ == '__main__':
     eval_progenitor(progenitor, src_data_loader_eval)
 
     print(">>> load the chopped model, the Descendant <<<")
-    descendant = torch.nn.Sequential(*(list(progenitor.children())[:1]))
+    descendant = torch.nn.Sequential(*(list(progenitor.children())[:5]))
     print(descendant)
 
 
     print(">>> get the activations after the nth conv, using Descendant <<<")
-    apply_descendant(descendant, src_data_loader, 'src', 'dev')
-    apply_descendant(descendant, src_data_loader_eval, 'src', 'eval')
     apply_descendant(descendant, tgt_data_loader, 'tgt', 'dev')
     apply_descendant(descendant, tgt_data_loader_eval, 'tgt', 'eval')
+    apply_descendant(descendant, src_data_loader, 'src', 'dev')
+    apply_descendant(descendant, src_data_loader_eval, 'src', 'eval')
+
 
     print(">>> construct dataloader after activations from 1st conv <<<")
     src_conv_1_activations_data_loader = get_conv_1_activations(train=True, dataset='src')
@@ -77,10 +78,10 @@ if __name__ == '__main__':
 
     # load models
     # load models
-    src_encoder = torch.nn.Sequential(*(list(progenitor.children())[1:-1]))
+    src_encoder = torch.nn.Sequential(*(list(progenitor.children())[5:-1]))
     src_classifier = torch.nn.Linear(2048, 10).to(torch.device('cuda:0'))
 
-    tgt_encoder = torch.nn.Sequential(*(list(progenitor.children())[1:-1]))
+    tgt_encoder = torch.nn.Sequential(*(list(progenitor.children())[5:-1]))
     tgt_classifier = torch.nn.Linear(2048, 10).to(torch.device('cuda:0'))
 
     critic = init_model(Discriminator(input_dims=params.d_input_dims,
