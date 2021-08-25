@@ -37,10 +37,13 @@ def apply_descendant(descendant, data_loader, src_or_tgt, dev_or_eval):
             activations.append(pred.detach().cpu().numpy())
             ys.append(np.expand_dims(label.detach().cpu().numpy(), axis=0))
 
-    #activations = activations
+    activations = np.asarray(activations)
     ys = np.asarray(ys)
 
+    print('the activations after the 1st conv have shape {}'.format(activations.shape))
     np.save('snapshots//' + src_or_tgt + '_' + dev_or_eval + '_1st_conv_activations.npy', activations)
+
+    print('the activations after the 1st conv have labels with shape {}'.format(ys.shape))
     np.save('snapshots//' + src_or_tgt + '_' + dev_or_eval + '_1st_conv_activations_labels.npy', ys)
 
     return activations, ys
