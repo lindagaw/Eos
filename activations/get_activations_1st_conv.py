@@ -38,13 +38,13 @@ def apply_descendant(descendant, data_loader, src_or_tgt, dev_or_eval):
             activations.append(pred.detach().cpu().numpy())
             ys.append(np.expand_dims(label.detach().cpu().numpy(), axis=0))
 
-    activations = torch.Tensor(activations)
-    ys = torch.from_numpy(np.asarray(ys))
+    activations = np.asarray(activations)
+    ys = from_numpy(np.asarray(ys))
 
     print('the activations after the 1st conv have shape {}'.format(activations.shape))
-    torch.save(activations, 'snapshots//' + src_or_tgt + '_' + dev_or_eval + '_1st_conv_activations.pt')
+    np.save('snapshots//' + src_or_tgt + '_' + dev_or_eval + '_1st_conv_activations.npy', activations)
 
     print('the activations after the 1st conv have labels with shape {}'.format(ys.shape))
-    torch.save(ys, 'snapshots//' + src_or_tgt + '_' + dev_or_eval + '_1st_conv_activations_labels.pt')
+    np.save('snapshots//' + src_or_tgt + '_' + dev_or_eval + '_1st_conv_activations_labels.npy', ys)
 
     return activations, ys
