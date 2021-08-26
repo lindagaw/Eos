@@ -38,10 +38,10 @@ class Descendant_Activations(data.Dataset):
             pre_process =  transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.5,), (0.5,))])
 
 
-            xs_train = torch.load('snapshots//' + dataset + '_dev_1st_conv_activations.npy')
-            xs_test = torch.load('snapshots//' + dataset + '_eval_1st_conv_activations.npy')
-            ys_train = torch.load('snapshots//' + dataset + '_dev_1st_conv_activations_labels.npy')
-            ys_test = torch.load('snapshots//' + dataset + '_eval_1st_conv_activations_labels.npy')
+            xs_train = torch.load('snapshots//' + dataset + '_dev_1st_conv_activations.pt')
+            xs_test = torch.load('snapshots//' + dataset + '_eval_1st_conv_activations.pt')
+            ys_train = torch.load('snapshots//' + dataset + '_dev_1st_conv_activations_labels.pt')
+            ys_test = torch.load('snapshots//' + dataset + '_eval_1st_conv_activations_labels.pt')
 
             torch.save(TensorDataset(xs_train, ys_train), self.root + self.training)
             torch.save(TensorDataset(xs_test, ys_test), self.root + self.testing)
