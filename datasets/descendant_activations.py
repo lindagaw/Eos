@@ -39,7 +39,7 @@ class Descendant_Activations(data.Dataset):
 
 
             xs_train = torch.load('snapshots//' + dataset + '_dev_1st_conv_activations.pt')
-            xs_test = torch.load('snapshots//' + dataset + '_eval_1st_conv_activations.pt'))
+            xs_test = torch.load('snapshots//' + dataset + '_eval_1st_conv_activations.pt')
             ys_train = torch.load('snapshots//' + dataset + '_dev_1st_conv_activations_labels.pt')
             ys_test = torch.load('snapshots//' + dataset + '_eval_1st_conv_activations_labels.pt')
 
