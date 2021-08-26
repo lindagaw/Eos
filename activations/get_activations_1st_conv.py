@@ -25,8 +25,6 @@ def apply_descendant(descendant, data_loader, src_or_tgt, dev_or_eval):
     # set loss function
     criterion = nn.CrossEntropyLoss()
 
-    print(data_loader)
-
     # evaluate network
     for (images, labels) in data_loader:
 

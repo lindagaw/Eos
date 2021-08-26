@@ -113,7 +113,9 @@ def get_conv_1_activations(train, dataset):
                                       transforms.Normalize(
                                           mean=params.dataset_mean,
                                           std=params.dataset_std)])
-    pre_process =  transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.5,), (0.5,))])
+    pre_process =  transforms.Compose([transforms.ToTensor(),
+                                        transforms.Normalize((0.5,), (0.5,))
+                                        ])
 
     conv_1_activations_dataset = Descendant_Activations(root=params.data_root,
                         train=train,
