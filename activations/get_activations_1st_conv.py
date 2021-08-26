@@ -39,7 +39,7 @@ def apply_descendant(descendant, data_loader, src_or_tgt, dev_or_eval):
             ys.append(np.expand_dims(label.detach().cpu().numpy(), axis=0))
 
     activations = np.asarray(activations)
-    ys = (np.asarray(ys)
+    ys = np.asarray(ys)
 
     print('the activations after the 1st conv have shape {}'.format(activations.shape))
     torch.save('snapshots//' + src_or_tgt + '_' + dev_or_eval + '_1st_conv_activations.npy', activations)
