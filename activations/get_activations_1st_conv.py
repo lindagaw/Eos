@@ -42,9 +42,9 @@ def apply_descendant(descendant, data_loader, src_or_tgt, dev_or_eval):
     ys = torch.from_numpy(np.asarray(ys))
 
     print('the activations after the 1st conv have shape {}'.format(activations.shape))
-    torch.save('snapshots//' + src_or_tgt + '_' + dev_or_eval + '_1st_conv_activations.pt', activations)
+    torch.save(activations, 'snapshots//' + src_or_tgt + '_' + dev_or_eval + '_1st_conv_activations.pt')
 
     print('the activations after the 1st conv have labels with shape {}'.format(ys.shape))
-    torch.save('snapshots//' + src_or_tgt + '_' + dev_or_eval + '_1st_conv_activations_labels.pt', ys)
+    torch.save(ys, 'snapshots//' + src_or_tgt + '_' + dev_or_eval + '_1st_conv_activations_labels.pt')
 
     return activations, ys
