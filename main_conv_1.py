@@ -45,7 +45,7 @@ if __name__ == '__main__':
 
     progenitor = models.resnet50(pretrained=True)
     progenitor.fc = torch.nn.Linear(2048, 10)
-    progenitor = progenitor.to(torch.device('cuda:1'))
+    progenitor = progenitor.to(torch.device('cuda:0'))
 
     if os.path.isfile('snapshots//progenitor-final.pt'):
         progenitor = init_model(progenitor, restore='snapshots//progenitor-final.pt')
@@ -79,10 +79,10 @@ if __name__ == '__main__':
     # load models
     # load models
     src_encoder = torch.nn.Sequential(*(list(progenitor.children())[5:-1]))
-    src_classifier = torch.nn.Linear(2048, 10).to(torch.device('cuda:1'))
+    src_classifier = torch.nn.Linear(2048, 10).to(torch.device('cuda:0'))
 
     tgt_encoder = torch.nn.Sequential(*(list(progenitor.children())[5:-1]))
-    tgt_classifier = torch.nn.Linear(2048, 10).to(torch.device('cuda:1'))
+    tgt_classifier = torch.nn.Linear(2048, 10).to(torch.device('cuda:0'))
 
     critic = init_model(Discriminator(input_dims=params.d_input_dims,
                                       hidden_dims=params.d_hidden_dims,
