@@ -35,14 +35,14 @@ num_epochs_pre = 15 #280
 log_step_pre = 20
 eval_step_pre = 20
 save_step_pre = 400
-num_epochs = 100
+num_epochs = 15
 log_step = 100
 save_step = 100
 manual_seed = None
 
 # params for optimizing models
-d_learning_rate = 1e-3
-c_learning_rate = 1e-5
+d_learning_rate = 1e-4
+c_learning_rate = 1e-6
 beta1 = 0.5
 beta2 = 0.9
 
