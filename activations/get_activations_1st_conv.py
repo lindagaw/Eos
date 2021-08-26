@@ -1,6 +1,7 @@
 """Pre-train descendant for source dataset."""
 import torch.nn as nn
 import torch.optim as optim
+import torch
 
 import params
 from utils import make_variable, save_model
@@ -37,13 +38,13 @@ def apply_descendant(descendant, data_loader, src_or_tgt, dev_or_eval):
             activations.append(pred.detach().cpu().numpy())
             ys.append(np.expand_dims(label.detach().cpu().numpy(), axis=0))
 
-    activations = np.asarray(activations)
-    ys = np.asarray(ys)
+    activations = torch.from_numpy(np.asarray(activations))
+    ys = torch.from_numpy(np.asarray(ys))
 
     print('the activations after the 1st conv have shape {}'.format(activations.shape))
-    np.save('snapshots//' + src_or_tgt + '_' + dev_or_eval + '_1st_conv_activations.npy', activations)
+    torch.save('snapshots//' + src_or_tgt + '_' + dev_or_eval + '_1st_conv_activations.pt', activations)
 
     print('the activations after the 1st conv have labels with shape {}'.format(ys.shape))
-    np.save('snapshots//' + src_or_tgt + '_' + dev_or_eval + '_1st_conv_activations_labels.npy', ys)
+    torch.save('snapshots//' + src_or_tgt + '_' + dev_or_eval + '_1st_conv_activations_labels.pt', ys)
 
     return activations, ys
