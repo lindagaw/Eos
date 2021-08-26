@@ -16,7 +16,7 @@ def apply_descendant(descendant, data_loader, src_or_tgt, dev_or_eval):
     descendant.eval()
     descendant.cuda()
 
-    activations =  torch.Tensor([])
+    activations =  torch.Tensor([]).cuda()
     ys = []
 
     # init loss and accuracy
