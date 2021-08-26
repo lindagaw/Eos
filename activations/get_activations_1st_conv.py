@@ -16,7 +16,7 @@ def apply_descendant(descendant, data_loader, src_or_tgt, dev_or_eval):
     descendant.eval()
     descendant.cuda()
 
-    activations = []
+    activations =  torch.Tensor([])
     ys = []
 
     # init loss and accuracy
@@ -32,18 +32,19 @@ def apply_descendant(descendant, data_loader, src_or_tgt, dev_or_eval):
         images = make_variable(images, volatile=True).squeeze_()
         labels = make_variable(labels).squeeze_()
 
-        preds = descendant(images)
+        preds = descendant(images).detach()
+        activations = torch.cat((activations, preds), 0)
 
         for pred, label in zip(preds, labels):
-            activations.append(pred.detach().cpu().numpy())
+            #activations.append(pred.detach())
             ys.append(np.expand_dims(label.detach().cpu().numpy(), axis=0))
 
-    activations = torch.Tensor(activations)
+    #activations = torch.Tensor(activations)
     ys = torch.from_numpy(np.asarray(ys))
 
     print('the activations after the 1st conv have shape {}'.format(activations.shape))
     torch.save(activations, 'snapshots//' + src_or_tgt + '_' + dev_or_eval + '_1st_conv_activations.pt')
-
+    del activations
     print('the activations after the 1st conv have labels with shape {}'.format(ys.shape))
     torch.save(ys, 'snapshots//' + src_or_tgt + '_' + dev_or_eval + '_1st_conv_activations_labels.pt')
 
