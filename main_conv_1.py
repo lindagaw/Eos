@@ -61,10 +61,10 @@ if __name__ == '__main__':
 
 
     print(">>> get the activations after the nth conv, using Descendant <<<")
-    #apply_descendant(descendant, tgt_data_loader_eval, 'tgt', 'eval')
-    #apply_descendant(descendant, tgt_data_loader, 'tgt', 'dev')
-    #apply_descendant(descendant, src_data_loader, 'src', 'dev')
-    #apply_descendant(descendant, src_data_loader_eval, 'src', 'eval')
+    apply_descendant(descendant, tgt_data_loader_eval, 'tgt', 'eval')
+    apply_descendant(descendant, tgt_data_loader, 'tgt', 'dev')
+    apply_descendant(descendant, src_data_loader, 'src', 'dev')
+    apply_descendant(descendant, src_data_loader_eval, 'src', 'eval')
 
 
     print(">>> construct dataloader after activations from 1st conv <<<")
