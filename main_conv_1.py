@@ -60,8 +60,6 @@ if __name__ == '__main__':
     descendant = torch.nn.Sequential(*(list(progenitor.children())[:5]))
     print(descendant)
 
-    del progenitor
-    torch.cuda.empty_cache()
 
     print(">>> get the activations after the nth conv, using Descendant <<<")
     apply_descendant(descendant, tgt_data_loader_eval, 'tgt', 'eval')
@@ -99,7 +97,7 @@ if __name__ == '__main__':
         src_classifier = nn.DataParallel(src_classifier)
         tgt_encoder = nn.DataParallel(tgt_encoder)
         tgt_classifier = nn.DataParallel(tgt_classifier)
-
+    
     src_encoder.to(device)
     src_classifier.to(device)
     tgt_encoder.to(device)
