@@ -81,15 +81,27 @@ if __name__ == '__main__':
     # load models
     # load models
     src_encoder = torch.nn.Sequential(*(list(progenitor.children())[5:-1]))
-    src_classifier = torch.nn.Linear(2048, 10).to(torch.device('cuda:0'))
+    src_classifier = torch.nn.Linear(2048, 10)
 
     tgt_encoder = torch.nn.Sequential(*(list(progenitor.children())[5:-1]))
-    tgt_classifier = torch.nn.Linear(2048, 10).to(torch.device('cuda:0'))
+    tgt_classifier = torch.nn.Linear(2048, 10)
 
     critic = init_model(Discriminator(input_dims=params.d_input_dims,
                                       hidden_dims=params.d_hidden_dims,
                                       output_dims=params.d_output_dims),
                         restore=params.d_model_restore)
+    
+    if torch.cuda.device_count() > 1:
+        print("Let's use", torch.cuda.device_count(), "GPUs!")
+        src_encoder = nn.DataParallel(src_encoder)
+        src_classifier = nn.DataParallel(src_classifier)
+        tgt_encoder = nn.DataParallel(tgt_encoder)
+        tgt_classifier = nn.DataParallel(tgt_classifier)
+
+    src_encoder.to(device)
+    src_classifier.to(device)
+    tgt_encoder.to(device)
+    tgt_classifier.to(device)
 
     # train source model
     print("=== Training classifier for source domain ===")
@@ -140,5 +152,5 @@ if __name__ == '__main__':
     print(">>> source + target encoders <<<")
     eval_ADDA(src_encoder, tgt_encoder, src_classifier, tgt_classifier, critic, tgt_conv_1_activations_data_loader_eval)
 
-    print(">>> enhanced domain adaptation<<<")
-    eval_tgt_with_probe(tgt_encoder, critic, src_classifier, tgt_classifier, tgt_conv_1_activations_data_loader_eval)
+    #print(">>> enhanced domain adaptation<<<")
+    #eval_tgt_with_probe(tgt_encoder, critic, src_classifier, tgt_classifier, tgt_conv_1_activations_data_loader_eval)
