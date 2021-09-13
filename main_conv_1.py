@@ -38,11 +38,11 @@ if __name__ == '__main__':
     #tgt_data_loader = get_office_31(dataset = 'office-31-webcam', train=True)
     #tgt_data_loader_eval = get_office_31(dataset = 'office-31-webcam', train=False)
 
-    tgt_data_loader = get_cifar_10(train=True)
-    tgt_data_loader_eval = get_cifar_10(train=False)
+    src_data_loader = get_cifar_10(train=True)
+    src_data_loader_eval = get_cifar_10(train=False)
 
-    src_data_loader = get_stl_10(split='train')
-    src_data_loader_eval = get_stl_10(split='test')
+    tgt_data_loader = get_stl_10(split='train')
+    tgt_data_loader_eval = get_stl_10(split='test')
 
     progenitor = models.resnet50(pretrained=True)
     progenitor.fc = torch.nn.Linear(2048, 10)
@@ -64,6 +64,7 @@ if __name__ == '__main__':
     print(">>> get the activations after the nth conv, using Descendant <<<")
     apply_descendant(descendant, tgt_data_loader_eval, 'tgt', 'eval')
     apply_descendant(descendant, tgt_data_loader, 'tgt', 'dev')
+
     apply_descendant(descendant, src_data_loader, 'src', 'dev')
     apply_descendant(descendant, src_data_loader_eval, 'src', 'eval')
 
