@@ -60,6 +60,8 @@ if __name__ == '__main__':
     descendant = torch.nn.Sequential(*(list(progenitor.children())[:5]))
     print(descendant)
 
+    del progenitor
+    torch.cuda.empty_cache()
 
     print(">>> get the activations after the nth conv, using Descendant <<<")
     apply_descendant(descendant, tgt_data_loader_eval, 'tgt', 'eval')
