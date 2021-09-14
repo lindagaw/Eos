@@ -4,6 +4,8 @@ import params
 
 from torchvision import datasets, transforms, models
 
+import torch.nn as nn
+
 from core import eval_src, eval_tgt, train_src, train_tgt, train_tgt_classifier
 from core import train_progenitor, eval_progenitor
 from core import eval_tgt_with_probe
@@ -24,6 +26,7 @@ from datasets import get_cifar_10, get_stl_10
 import torch
 import os
 import gc
+
 gc.collect()
 torch.cuda.empty_cache()
 
@@ -91,12 +94,12 @@ if __name__ == '__main__':
                                       output_dims=params.d_output_dims),
                         restore=params.d_model_restore)
     
-    if torch.cuda.device_count() > 1:
-        print("Let's use", torch.cuda.device_count(), "GPUs!")
-        src_encoder = nn.DataParallel(src_encoder)
-        src_classifier = nn.DataParallel(src_classifier)
-        tgt_encoder = nn.DataParallel(tgt_encoder)
-        tgt_classifier = nn.DataParallel(tgt_classifier)
+    #if torch.cuda.device_count() > 1:
+    #    print("Let's use", torch.cuda.device_count(), "GPUs!")
+    #    src_encoder = nn.DataParallel(src_encoder)
+    #    src_classifier = nn.DataParallel(src_classifier)
+    #    tgt_encoder = nn.DataParallel(tgt_encoder)
+    #    tgt_classifier = nn.DataParallel(tgt_classifier)
     
     src_encoder.to(device)
     src_classifier.to(device)
