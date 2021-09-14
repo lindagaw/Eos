@@ -34,6 +34,8 @@ if __name__ == '__main__':
     # init random seed
     init_random_seed(params.manual_seed)
 
+    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+
     # load dataset
 
     #src_data_loader = get_office_31(dataset = 'office-31-amazon', train=True)
@@ -92,7 +94,7 @@ if __name__ == '__main__':
                                       hidden_dims=params.d_hidden_dims,
                                       output_dims=params.d_output_dims),
                         restore=params.d_model_restore)
-    
+
     #if torch.cuda.device_count() > 1:
     #    print("Let's use", torch.cuda.device_count(), "GPUs!")
     #    src_encoder = nn.DataParallel(src_encoder)
@@ -100,7 +102,7 @@ if __name__ == '__main__':
     #    tgt_encoder = nn.DataParallel(tgt_encoder)
     #    tgt_classifier = nn.DataParallel(tgt_classifier)
     #    critic = nn.DataParallel(critic)
-    
+
     src_encoder.to(device)
     src_classifier.to(device)
     tgt_encoder.to(device)
