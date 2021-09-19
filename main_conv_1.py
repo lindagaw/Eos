@@ -152,13 +152,13 @@ if __name__ == '__main__':
     print(">>> only source encoder <<<")
     eval_tgt(src_encoder, src_classifier, tgt_conv_1_activations_data_loader_eval)
 
-    print(">>> ADDA encoder <<<")
+    print(">>> ADDA <<<")
     eval_tgt(tgt_encoder, src_classifier, tgt_conv_1_activations_data_loader_eval)
 
     get_distribution(src_encoder, tgt_encoder, src_classifier, tgt_classifier, critic, src_conv_1_activations_data_loader, 'src')
     get_distribution(src_encoder, tgt_encoder, src_classifier, tgt_classifier, critic, tgt_conv_1_activations_data_loader, 'tgt')
 
-    print(">>> source + target encoders <<<")
+    print(">>> Enforced Transfer <<<")
     eval_ADDA(src_encoder, tgt_encoder, src_classifier, tgt_classifier, critic, tgt_conv_1_activations_data_loader_eval)
 
     #print(">>> enhanced domain adaptation<<<")
