@@ -190,7 +190,7 @@ def eval_tgt(encoder, classifier, data_loader):
     print("Avg Loss = {}, Avg Accuracy = {:2%}".format(loss, acc))
 
 
-def eval_Enforced_Transfer(tgt_encoder, src_classifier, tgt_classifier, critic, data_loader):
+def eval_Enforced_Transfer(src_encoder, tgt_encoder, src_classifier, tgt_classifier, critic, data_loader):
 
     """Evaluation for target encoder by source classifier on target dataset."""
     tgt_encoder.eval()
@@ -217,10 +217,7 @@ def eval_Enforced_Transfer(tgt_encoder, src_classifier, tgt_classifier, critic, 
         for label, src_pred, tgt_pred, tgt_critic \
                         in zip(labels, src_preds, tgt_preds, critic_at_tgt):
 
-            print(torch.argmax(tgt_critic))
-            print(tgt_critic)
-
-            if torch.argmax(tgt_critic) == 1:
+            if np.argmax(np.squeeze(tgt_critic)) == 1:
                 y_pred = np.argmax(tgt_pred)
             else:
                 y_pred = np.argmax(src_pred)

@@ -162,4 +162,4 @@ if __name__ == '__main__':
     #eval_ADDA(src_encoder, tgt_encoder, src_classifier, tgt_classifier, critic, tgt_conv_1_activations_data_loader_eval)
 
     print(">>> Enforced Transfer <<<")
-    eval_Enforced_Transfer(tgt_encoder, src_classifier, tgt_classifier, critic, tgt_conv_1_activations_data_loader)
+    eval_Enforced_Transfer(src_encoder, tgt_encoder, src_classifier, tgt_classifier, critic, tgt_conv_1_activations_data_loader)
