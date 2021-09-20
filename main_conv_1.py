@@ -9,7 +9,7 @@ import torch.nn as nn
 from core import eval_src, eval_tgt, train_src, train_tgt, train_tgt_classifier
 from core import train_progenitor, eval_progenitor
 from core import eval_tgt_with_probe
-from core import get_distribution, eval_ADDA, eval_Enforced_Transfer
+from core import get_distribution, eval_ADDA
 
 from activations import apply_descendant, apply_successor
 
@@ -33,8 +33,6 @@ torch.cuda.empty_cache()
 if __name__ == '__main__':
     # init random seed
     init_random_seed(params.manual_seed)
-
-    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
     # load dataset
 
@@ -152,14 +150,11 @@ if __name__ == '__main__':
     print(">>> only source encoder <<<")
     eval_tgt(src_encoder, src_classifier, tgt_conv_1_activations_data_loader_eval)
 
-    print(">>> ADDA <<<")
-    eval_tgt(tgt_encoder, src_classifier, tgt_conv_1_activations_data_loader_eval)
+    get_distribution(src_encoder, tgt_encoder, src_classifier, tgt_classifier, critic, src_conv_1_activations_data_loader, 'src')
+    get_distribution(src_encoder, tgt_encoder, src_classifier, tgt_classifier, critic, tgt_conv_1_activations_data_loader, 'tgt')
 
-    #get_distribution(src_encoder, tgt_encoder, src_classifier, tgt_classifier, critic, src_conv_1_activations_data_loader, 'src')
-    #get_distribution(src_encoder, tgt_encoder, src_classifier, tgt_classifier, critic, tgt_conv_1_activations_data_loader, 'tgt')
-    #
-    #print(">>> Enforced Transfer <<<")
-    #eval_ADDA(src_encoder, tgt_encoder, src_classifier, tgt_classifier, critic, tgt_conv_1_activations_data_loader_eval)
+    print(">>> source + target encoders <<<")
+    eval_ADDA(src_encoder, tgt_encoder, src_classifier, tgt_classifier, critic, tgt_conv_1_activations_data_loader_eval)
 
-    print(">>> Enforced Transfer <<<")
-    eval_Enforced_Transfer(src_encoder, tgt_encoder, src_classifier, tgt_classifier, critic, tgt_conv_1_activations_data_loader)
+    #print(">>> enhanced domain adaptation<<<")
+    #eval_tgt_with_probe(tgt_encoder, critic, src_classifier, tgt_classifier, tgt_conv_1_activations_data_loader_eval)

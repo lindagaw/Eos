@@ -117,6 +117,45 @@ def eval_ADDA(src_encoder, tgt_encoder, src_classifier, tgt_classifier, critic, 
 
     print("Avg Accuracy = {:2%}".format(accuracy_score(y_true=y_trues, y_pred=y_preds)))
 
+
+def eval_tgt_with_probe(encoder, critic, src_classifier, tgt_classifier, data_loader):
+    """Evaluation for target encoder by source classifier on target dataset."""
+    # set eval state for Dropout and BN layers
+    encoder.eval()
+    src_classifier.eval()
+    tgt_classifier.eval()
+    # init loss and accuracy
+    loss = 0.0
+    acc = 0.0
+    f1 = 0.0
+
+    ys_pred = []
+    ys_true = []
+    # set loss function
+    criterion = nn.CrossEntropyLoss()
+    flag = False
+    # evaluate network
+    for (images, labels) in data_loader:
+        images = make_variable(images, volatile=True)
+        labels = make_variable(labels).squeeze_()
+
+        probeds = critic(encoder(images))
+
+        for image, label, probed in zip(images, labels, probeds):
+            if torch.argmax(probed) == 1:
+                pred = torch.argmax(src_classifier(torch.squeeze(encoder(torch.unsqueeze(image, 0))))).detach().cpu().numpy()
+            else:
+                pred = torch.argmax(tgt_classifier(torch.squeeze(encoder(torch.unsqueeze(image, 0))))).detach().cpu().numpy()
+
+        ys_pred.append(np.squeeze(pred))
+        ys_true.append(np.squeeze(label.detach().cpu().numpy()))
+
+    loss /= len(data_loader)
+    acc /= len(data_loader.dataset)
+    #f1 /= len(data_loader.dataset)
+    print("Avg Accuracy = {:2%}".format(accuracy_score(y_true=ys_true, y_pred=ys_pred)))
+
+
 def eval_tgt_with_probe(encoder, critic, src_classifier, tgt_classifier, data_loader):
     """Evaluation for target encoder by source classifier on target dataset."""
     # set eval state for Dropout and BN layers
@@ -188,43 +227,3 @@ def eval_tgt(encoder, classifier, data_loader):
     #acc /= len(data_loader.dataset)
 
     print("Avg Loss = {}, Avg Accuracy = {:2%}".format(loss, acc))
-
-
-def eval_Enforced_Transfer(src_encoder, tgt_encoder, src_classifier, tgt_classifier, critic, data_loader):
-
-    """Evaluation for target encoder by source classifier on target dataset."""
-    tgt_encoder.eval()
-
-    src_classifier.eval()
-    tgt_classifier.eval()
-    # init loss and accuracy
-    # set loss function
-    criterion = nn.CrossEntropyLoss()
-    # evaluate network
-
-    y_trues = []
-    y_preds = []
-
-    for (images, labels) in data_loader:
-        images = make_variable(images, volatile=True)
-        labels = make_variable(labels).squeeze_()
-        torch.no_grad()
-
-        src_preds = src_classifier(torch.squeeze(src_encoder(images))).detach().cpu().numpy()
-        tgt_preds = tgt_classifier(torch.squeeze(tgt_encoder(images))).detach().cpu().numpy()
-        critic_at_tgt = critic(torch.squeeze(tgt_encoder(images))).detach().cpu().numpy()
-
-        for label, src_pred, tgt_pred, tgt_critic \
-                        in zip(labels, src_preds, tgt_preds, critic_at_tgt):
-
-            if np.argmax(np.squeeze(tgt_critic)) == 1:
-                y_pred = np.argmax(tgt_pred)
-            else:
-                y_pred = np.argmax(src_pred)
-
-            #y_pred = np.argmax(tgt_pred)
-            y_preds.append(y_pred)
-            y_trues.append(label.detach().cpu().numpy())
-
-
-    print("Avg Accuracy = {:2%}".format(accuracy_score(y_true=y_trues, y_pred=y_preds)))
