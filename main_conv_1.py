@@ -9,7 +9,7 @@ import torch.nn as nn
 from core import eval_src, eval_tgt, train_src, train_tgt, train_tgt_classifier
 from core import train_progenitor, eval_progenitor
 from core import eval_tgt_with_probe
-from core import get_distribution, eval_ADDA
+from core import get_distribution, eval_ADDA, eval_Enforced_Transfer
 
 from activations import apply_descendant, apply_successor
 
@@ -155,11 +155,11 @@ if __name__ == '__main__':
     print(">>> ADDA <<<")
     eval_tgt(tgt_encoder, src_classifier, tgt_conv_1_activations_data_loader_eval)
 
-    get_distribution(src_encoder, tgt_encoder, src_classifier, tgt_classifier, critic, src_conv_1_activations_data_loader, 'src')
-    get_distribution(src_encoder, tgt_encoder, src_classifier, tgt_classifier, critic, tgt_conv_1_activations_data_loader, 'tgt')
+    #get_distribution(src_encoder, tgt_encoder, src_classifier, tgt_classifier, critic, src_conv_1_activations_data_loader, 'src')
+    #get_distribution(src_encoder, tgt_encoder, src_classifier, tgt_classifier, critic, tgt_conv_1_activations_data_loader, 'tgt')
+
+    #print(">>> Enforced Transfer <<<")
+    #eval_ADDA(src_encoder, tgt_encoder, src_classifier, tgt_classifier, critic, tgt_conv_1_activations_data_loader_eval)
 
     print(">>> Enforced Transfer <<<")
-    eval_ADDA(src_encoder, tgt_encoder, src_classifier, tgt_classifier, critic, tgt_conv_1_activations_data_loader_eval)
-
-    #print(">>> enhanced domain adaptation<<<")
-    #eval_tgt_with_probe(tgt_encoder, critic, src_classifier, tgt_classifier, tgt_conv_1_activations_data_loader_eval)
+    eval_Enforced_Transfer(tgt_encoder, src_classifier, tgt_classifier, critic, tgt_conv_1_activations_data_loader)
