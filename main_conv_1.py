@@ -131,7 +131,7 @@ if __name__ == '__main__':
     print(">>> Critic <<<")
     print(critic)
 
-
+    #
     # init weights of target encoder with those of source encoder
     #if not tgt_encoder.restored:
     #    tgt_encoder.load_state_dict(src_encoder.state_dict())
