@@ -41,11 +41,13 @@ if __name__ == '__main__':
     #tgt_data_loader = get_office_31(dataset = 'office-31-webcam', train=True)
     #tgt_data_loader_eval = get_office_31(dataset = 'office-31-webcam', train=False)
 
-    src_data_loader = get_cifar_10(train=True)
-    src_data_loader_eval = get_cifar_10(train=False)
+    cifar_10_data_loader_pseudo_train, cifar_10_data_loader_train, cifar_10_data_loader_test = get_cifar_10()
+    stl_10_data_loader_pseudo_train, stl_10_data_loader_train, stl_10_data_loader_test = get_stl_10()
 
-    tgt_data_loader = get_stl_10(split='train')
-    tgt_data_loader_eval = get_stl_10(split='test')
+    src_data_loader = cifar_10_data_loader_train
+    src_data_loader_eval = cifar_10_data_loader_test
+    tgt_data_loader = stl_10_data_loader_pseudo_train
+    tgt_data_loader_eval = stl_10_data_loader_test
 
     progenitor = models.resnet50(pretrained=True)
     progenitor.fc = torch.nn.Linear(2048, 10)
